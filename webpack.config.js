@@ -17,11 +17,12 @@ var config = {
   module: {
     loaders: [
       { test: /\.(js|jsx)$/, loader: 'babel' },
-      { test: /\.css$/, loaders: ['style', 'css'] }
+      { test: /\.css$/, loaders: ['style', 'css'] },
+      { test: /\.png$/, loader: 'file-loader?name=[name].[ext]' }
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx', '.css']
+    extensions: ['', '.js', '.jsx', '.css', '.png']
   },
   plugins: [
     // expose and write the allowed env vars on the compiled bundle

@@ -1,0 +1,367 @@
+input:focus, button:focus, a:focus {
+  outline: 0;
+}
+
+.sidebar {
+  z-index: 3;
+  background: #2b2f3a;
+  width: 25%;
+  position: absolute;
+  height: 100%;
+}
+
+.main-call {
+  background: #fff;
+  color: #4985c9;
+  font-weight: lighter;
+  font-size: 12px;
+  line-height: 50px;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 3px;
+}
+
+.lists {
+  width: 100%;
+  position: absolute;
+  top: 56px;
+  bottom: 0;
+}
+
+.list-link {
+  position: relative;
+  background: #3b4256;
+  font-weight: lighter;
+  margin: 0 5px 5px 0;
+  box-shadow: 0 2px 0 #262b39;
+  text-shadow: 0px -1px 0px #1d253b;
+}
+
+.list-link.active {
+  background: #505a73;
+  text-shadow: 0px -1px 0px #3d465e;
+}
+
+.list-link a {
+  width: 100%;
+  display: block;
+  line-height: 41px;
+  height: 40px;
+  padding: 0 10px;
+  box-sizing: border-box;
+  font-size: 13px;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.list-link:hover .list-link-controls {
+  display: block;
+}
+
+.list-link-controls {
+  display: none;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.list-link-controls button {
+  font-size: 14px;
+  text-shadow: 0px -1px 0px #1d253b;
+  padding: 0;
+  background: none;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.list-link-controls button span {
+  display: none;
+}
+
+.list-link-form input[type=text] {
+  font-size: 13px;
+  font-family: Helvetica, "sans-serif";
+  font-weight: lighter;
+  background: #464E69;
+  line-height: 41px;
+  height: 40px;
+  padding: 0 10px;
+  color: #fff;
+  border-top: 1px solid #343B54;
+  width: 100%;
+  border: 0;
+  box-sizing: border-box;
+}
+
+.list-link-form input[type=text]::-webkit-input-placeholder {
+  color: #5f6a90;
+}
+
+.new-list-btn {
+  width: 100%;
+  text-align: center;
+  background: none;
+  border: none;
+  color: #4E6386;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.list-blank-slate {
+  color: #515D82;
+  font-size: 14px;
+  text-align: center;
+  position: relative;
+  padding-bottom: 100px;
+}
+
+.list-blank-slate:after {
+  bottom: 0;
+  left: 50%;
+  margin-left: -40px;
+  content: '\f0a7';
+  font-size: 80px;
+  position: absolute;
+  display: block;
+  font-family: FontAwesome;
+  -webkit-font-smoothing: antialiased;
+}
+
+.content-container {
+  width: 75%;
+  position: absolute;
+  left: 25%;
+  height: 100%;
+}
+
+.pomodoros-blank-slate:before {
+  font-family: FontAwesome;
+  -webkit-font-smoothing: antialiased;
+  display: block;
+  font-size: 120px;
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  margin-left: -60px;
+  left: 50%;
+  top: 0;
+}
+
+.pomodoros-blank-slate {
+  position: absolute;
+  top: 50%;
+  margin-top: -78px;
+  padding-top: 140px;
+  color: #D7D7D7;
+  font-size: 16px;
+  font-weight: lighter;
+  width: 100%;
+  text-align: center;
+}
+
+.pomodoros-without-list {
+  top: 62%;
+}
+
+.pomodoros-without-list:before {
+  content: '\f071';
+}
+
+.pomodoros-list-empty:before {
+  content: '\f0a6';
+}
+
+.new-pomodoro-form {
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 11px #b3b3b3;
+  padding: 10px;
+}
+
+.new-pomodoro-form input[type=text]::-webkit-input-placeholder {
+  color: #d2d0d0;
+}
+
+.new-pomodoro-form input[type=text] {
+  border: none;
+  font-size: 15px;
+  padding: 10px;
+  background: #F7F7F7;
+  border-top: 1px solid #E9E9E9;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.pomodoros-container {
+  width: 100%;
+  overflow: scroll;
+  position: absolute;
+  top: 211px;
+  bottom: 0;
+}
+
+.pomodoro-task {
+  position: relative;
+  background: #f6f6f6;
+  margin-bottom: 1px;
+  border-bottom: 1px solid #E6E6E6;
+  cursor: pointer;
+  overflow: hidden;
+  height: 46px;
+  box-sizing: border-box;
+}
+
+.pomodoro-task-name {
+  text-shadow: 0px 1px 0px #fff;
+  margin: 0;
+  padding: 0 10px;
+  color: #968D8D;
+  font-size: 13px;
+  font-weight: lighter;
+  letter-spacing: 1px;
+  line-height: 46px;
+}
+
+.pomodoro-task-form input[type=text] {
+  border: none;
+  background: transparent;
+  padding: 0 10px;
+  line-height: 45px;
+  width: 100%;
+
+  font-family: Helvetica, "sans-serif";
+
+  text-shadow: 0px 1px 0px #fff;
+  color: #423b3b;
+  font-size: 13px;
+  font-weight: lighter;
+  letter-spacing: 1px;
+}
+
+.pomodoro-task-controls {
+  position: absolute;
+  top: 12px;
+  right: 10px;
+  display: none;
+}
+
+.pomodoro-task:hover .pomodoro-task-controls {
+  display: block;
+}
+
+.pomodoro-task-controls .control-button {
+  display: inline-block;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  text-indent: -99999px;
+  position: relative;
+  height: 20px;
+  width: 20px;
+}
+
+.pomodoro-task-controls .control-button:before {
+  text-shadow: 0px 2px 0px white;
+  color: #acaaaa;
+  font-size: 17px;
+  left: 0;
+  top: 0;
+  display: block;
+  height: 20px;
+  width: 20px;
+  position: absolute;
+  text-indent: initial;
+  font-family: FontAwesome;
+  -webkit-font-smoothing: antialiased;
+}
+
+.pomodoro-task-controls .control-button:hover:before {
+  color: #878080;
+}
+
+.pomodoro-task-controls .control-button.start:before {
+  content: '\f04b';
+}
+
+.pomodoro-task-controls .control-button.destroy:before {
+  content: '\f014';
+}
+
+.pomodoro-task-controls .control-button.edit:before {
+  content: '\f040';
+}
+
+.main-counter {
+  position: relative;
+  z-index: 2;
+}
+
+.counter-current-running-item {
+  background: #3577c3;
+  color: #fff;
+  padding-top: 19px;
+  min-height: 50px;
+  box-sizing: border-box;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 11px;
+}
+
+.counter {
+  position: relative;
+  background: #4985c9;
+  height: 100px;
+}
+
+.counter-timeout {
+  background: #ED3E3E;
+}
+
+.counter-time {
+  position: absolute;
+  font-size: 50px;
+  display: inline-block;
+  color: #fff;
+  text-align: center;
+  margin: 0;
+  top: 20px;
+  left: 30px;
+  font-weight: 900;
+  font-family: Lato;
+}
+
+.counter-action-buttons {
+  position: absolute;
+  left: 185px;
+  top: 35px;
+}
+
+.counter-action-button {
+  margin-right: 5px;
+  font-family: Lato;
+  font-weight: 100;
+  line-height: 30px;
+  font-size: 13px;
+  border-radius: 3px;
+  padding: 0 10px;
+  background: transparent;
+  border: 1px solid white;
+  color: #fff;
+  cursor: pointer;
+}
+
+.counter-action-button:hover {
+  background: #3D82CA;
+}
+
+.counter-timeout .counter-action-button:hover {
+  background: #DC2A2A;
+}
+
+.counter-action-button.primary {
+  font-weight: 400;
+}
