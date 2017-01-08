@@ -1,0 +1,7 @@
+{
+  "extends": ["standard", "standard-jsx"],
+  "parser": "babel-eslint",
+  "rules": {
+    "react/jsx-closing-bracket-location": [1, "after-props"]
+  }
+}

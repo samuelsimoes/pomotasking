@@ -5,7 +5,7 @@ var webpack = require('webpack'),
     HtmlWebpackPlugin = require('html-webpack-plugin'),
     WriteFilePlugin = require('write-file-webpack-plugin')
 
-module.exports = {
+var config = {
   entry: {
     popup: path.join(__dirname, 'src', 'js', 'popup.js'),
     background: path.join(__dirname, 'src', 'js', 'background.js')
@@ -39,3 +39,15 @@ module.exports = {
     new WriteFilePlugin()
   ]
 }
+
+if (process.env.NODE_ENV !== 'production') {
+  config.module.preLoaders = [
+    {
+      test: /\.(js|jsx)$/,
+      loader: 'eslint-loader',
+      exclude: /(node_modules)/
+    }
+  ]
+}
+
+module.exports = config
