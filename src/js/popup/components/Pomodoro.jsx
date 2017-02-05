@@ -95,7 +95,7 @@ export default class Pomodoro extends Component {
   render () {
     return (
       <div
-        className='pomodoro-task'>
+        className='pomodoro-task editable'>
         {this.state.editing ? this.renderForm() : this.renderTaskName()}
       </div>
     )

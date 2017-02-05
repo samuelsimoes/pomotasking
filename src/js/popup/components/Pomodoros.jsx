@@ -24,6 +24,12 @@ let List = SortableContainer(({items, actions}) =>
 )
 
 export default class Pomodoros extends Component {
+  constructor () {
+    super(...arguments)
+
+    this.state = { showingFinished: false }
+  }
+
   render () {
     if (this.props.currentListID) {
       return this.renderBody()
@@ -44,13 +50,43 @@ export default class Pomodoros extends Component {
 
         <div className='pomodoros-container'>
           {this.renderList()}
+          {this.renderShowFinishedButton()}
+          {this.renderFinishedList()}
         </div>
       </div>
     )
   }
 
+  renderShowFinishedButton () {
+    if (!this.props.finishedPomodoros.length) { return }
+
+    return (
+      <button
+        className='pomodoros-list-finished-separator'
+        type='button'
+        onClick={() => this.setState({ showingFinished: !this.state.showingFinished })}>
+        {this.state.showingFinished ? 'Hide' : 'Show'} Completed ({this.props.finishedPomodoros.length})
+      </button>
+    )
+  }
+
+  renderFinishedList () {
+    if (!this.state.showingFinished) { return }
+
+    return this.props.finishedPomodoros.map(pomodoro =>
+      <div
+        key={`finished-pomodoro-${pomodoro.id}`}
+        className='pomodoro-task'>
+        <p
+          className='pomodoro-task-name'>
+          {pomodoro.description}
+        </p>
+      </div>
+    )
+  }
+
   renderList () {
-    if (this.props.waitingPomodoros.length) {
+    if (this.props.pomodoros.length) {
       return (
         <List
           items={this.props.waitingPomodoros}

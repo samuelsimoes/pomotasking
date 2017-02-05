@@ -8,6 +8,7 @@ function mapStateToProps (state) {
   return {
     pomodoros: state.pomodoros,
     waitingPomodoros: state.pomodoros.filter(pomodoro => pomodoro.status === pomodoroStatuses.WAITING),
+    finishedPomodoros: state.pomodoros.filter(pomodoro => pomodoro.status === pomodoroStatuses.FINISHED).reverse(),
     currentListID: state.currentListID
   }
 }

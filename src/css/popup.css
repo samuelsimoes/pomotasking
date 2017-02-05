@@ -246,10 +246,13 @@ input:focus, button:focus, a:focus {
   background: #f6f6f6;
   margin-bottom: 1px;
   border-bottom: 1px solid #E6E6E6;
-  cursor: pointer;
   overflow: hidden;
   height: 46px;
   box-sizing: border-box;
+}
+
+.pomodoro-task.editable {
+  cursor: pointer;
 }
 
 .pomodoro-task-name {
@@ -399,4 +402,15 @@ input:focus, button:focus, a:focus {
 
 .counter-action-button.primary {
   font-weight: bolder;
+}
+
+.pomodoros-list-finished-separator {
+  width: 100%;
+  background: #f1f1f1;
+  color: #7b7b7b;
+  border: none;
+  cursor: pointer;
+  padding: 8px 5px;
+  border-bottom: 1px solid #e2e2e2;
+  margin-bottom: 1px;
 }
