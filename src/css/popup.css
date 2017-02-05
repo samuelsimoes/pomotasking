@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'Lato';
+  src: url('../fonts/lato.ttf')  format('truetype');
+}
+
 body, input {
   font-family: Helvetica, "sans-serif";
 }
@@ -342,8 +347,7 @@ input:focus, button:focus, a:focus {
 
 .counter-action-button {
   margin-right: 5px;
-  font-family: Lato;
-  font-weight: 100;
+  font-weight: lighter;
   line-height: 30px;
   font-size: 13px;
   border-radius: 3px;
@@ -363,5 +367,5 @@ input:focus, button:focus, a:focus {
 }
 
 .counter-action-button.primary {
-  font-weight: 400;
+  font-weight: bolder;
 }
