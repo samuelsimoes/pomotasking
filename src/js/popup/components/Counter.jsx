@@ -60,7 +60,7 @@ export default class Counter extends Component {
               type='button'
               onClick={this.startLongPause}
               className='counter-action-button'>
-              pause 25 minutes
+              pause 15 minutes
             </button>
 
             <button

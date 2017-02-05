@@ -3,7 +3,7 @@ import * as runnableTypes from '../constants/runnableTypes'
 export default function (startedAt, itemType, now = new Date()) {
   let timeToFinish = {
     [runnableTypes.SHORT_PAUSE]: 300,
-    [runnableTypes.LONG_PAUSE]: 1500,
+    [runnableTypes.LONG_PAUSE]: 900,
     [runnableTypes.POMODORO]: 1500
   }[itemType]
 
