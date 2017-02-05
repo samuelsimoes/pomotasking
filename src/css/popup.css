@@ -72,21 +72,40 @@ input:focus, button:focus, a:focus {
   display: none;
   position: absolute;
   right: 10px;
-  top: 10px;
+  top: 12px;
+}
+
+.list-link-controls button:before {
+  font-family: BaseIcons;
+  -webkit-font-smoothing: antialiased;
+  text-indent: initial;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+}
+
+.list-link-controls .destroy:before {
+  content: '\f014';
+}
+
+.list-link-controls .edit:before {
+  content: '\f040';
 }
 
 .list-link-controls button {
   font-size: 14px;
+  width: 14px;
+  height: 14px;
+  position: relative;
+  border: 1px solid white;
+  text-indent: -99999px;
   text-shadow: 0px -1px 0px #1d253b;
   padding: 0;
   background: none;
   color: #fff;
   border: none;
   cursor: pointer;
-}
-
-.list-link-controls button span {
-  display: none;
 }
 
 .list-link-form input[type=text] {
@@ -107,14 +126,26 @@ input:focus, button:focus, a:focus {
   color: #5f6a90;
 }
 
+.new-list-btn:before {
+  content: '\f104';
+  font-family: BaseIcons;
+  -webkit-font-smoothing: antialiased;
+  position: absolute;
+  left: 0;
+  top: 5px;
+}
+
 .new-list-btn {
-  width: 100%;
-  text-align: center;
+  padding-left: 20px;
+  position: relative;
+  text-align: left;
   background: none;
   border: none;
   color: #4E6386;
   cursor: pointer;
   font-size: 15px;
+  left: 50%;
+  margin-left: -43px;
 }
 
 .list-blank-slate {
@@ -133,7 +164,7 @@ input:focus, button:focus, a:focus {
   font-size: 80px;
   position: absolute;
   display: block;
-  font-family: FontAwesome;
+  font-family: BaseIcons;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -145,7 +176,7 @@ input:focus, button:focus, a:focus {
 }
 
 .pomodoros-blank-slate:before {
-  font-family: FontAwesome;
+  font-family: BaseIcons;
   -webkit-font-smoothing: antialiased;
   display: block;
   font-size: 120px;
@@ -247,7 +278,7 @@ input:focus, button:focus, a:focus {
 
 .pomodoro-task-controls {
   position: absolute;
-  top: 12px;
+  top: 14px;
   right: 10px;
   display: none;
 }
@@ -279,7 +310,7 @@ input:focus, button:focus, a:focus {
   width: 20px;
   position: absolute;
   text-indent: initial;
-  font-family: FontAwesome;
+  font-family: BaseIcons;
   -webkit-font-smoothing: antialiased;
 }
 

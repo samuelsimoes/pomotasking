@@ -15,7 +15,7 @@ export default class Sidebar extends Component {
           <button
             onClick={this.props.actions.buildList}
             className='new-list-btn'>
-            <i className='fa fa-plus' />&nbsp;New List
+            New List
           </button>
         </div>
       </div>

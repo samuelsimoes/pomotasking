@@ -82,17 +82,17 @@ export default class PomodoroListLink extends PureComponent {
 
         <div className='list-link-controls'>
           <button
+            className='edit'
             type='button'
             onClick={this.startEdit}>
-            <i className='fa fa-pencil' />
-            <span>Edit</span>
+            Edit
           </button>
           &nbsp;
           <button
             type='button'
+            className='destroy'
             onClick={this.destroy}>
-            <i className='fa fa-times' />
-            <span>Remove</span>
+            Remove
           </button>
         </div>
       </div>

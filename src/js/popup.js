@@ -1,3 +1,4 @@
+import '../fonts/BaseIcons.font'
 import '../css/popup.css'
 import App from './popup/components/App'
 import React from 'react'
