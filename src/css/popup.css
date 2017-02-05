@@ -1,3 +1,7 @@
+body, input {
+  font-family: Helvetica, "sans-serif";
+}
+
 input:focus, button:focus, a:focus {
   outline: 0;
 }
@@ -82,7 +86,6 @@ input:focus, button:focus, a:focus {
 
 .list-link-form input[type=text] {
   font-size: 13px;
-  font-family: Helvetica, "sans-serif";
   font-weight: lighter;
   background: #464E69;
   line-height: 41px;
@@ -230,9 +233,6 @@ input:focus, button:focus, a:focus {
   padding: 0 10px;
   line-height: 45px;
   width: 100%;
-
-  font-family: Helvetica, "sans-serif";
-
   text-shadow: 0px 1px 0px #fff;
   color: #423b3b;
   font-size: 13px;
