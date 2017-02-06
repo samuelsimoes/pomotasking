@@ -37,12 +37,14 @@ export function newPomodoro (description) {
 }
 
 export function update (id, data) {
-  return function (dispatch) {
+  return function (dispatch, getStore) {
     dispatch({
       type: actions.UPDATE_POMODORO,
       id,
       data
     })
+
+    pomodorosRepository.persistPomodoro(getStore().pomodoros.find(pomodoro => pomodoro.id === id))
   }
 }
 
