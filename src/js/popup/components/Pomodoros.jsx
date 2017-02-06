@@ -97,7 +97,7 @@ export default class Pomodoros extends Component {
 
             this.props.actions.updateWaitingPomodorosOrder(newOrder)
           }}
-          shouldCancelStart={(evt) => evt.target.tagName === 'BUTTON'}
+          shouldCancelStart={(evt) => evt.target.tagName !== 'P'}
           actions={this.props.actions} />
       )
     } else {
