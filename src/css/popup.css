@@ -255,6 +255,10 @@ input:focus, button:focus, a:focus {
   cursor: pointer;
 }
 
+.pomodoro-task.finished {
+  opacity: 0.6;
+}
+
 .pomodoro-task-name {
   text-shadow: 0px 1px 0px #fff;
   margin: 0;

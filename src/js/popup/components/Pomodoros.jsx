@@ -74,7 +74,7 @@ export default class Pomodoros extends Component {
     return this.props.finishedPomodoros.map(pomodoro =>
       <div
         key={`finished-pomodoro-${pomodoro.id}`}
-        className='pomodoro-task'>
+        className='pomodoro-task finished'>
         <p
           className='pomodoro-task-name'>
           {pomodoro.description}
