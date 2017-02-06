@@ -190,7 +190,7 @@ input:focus, button:focus, a:focus {
 
 .pomodoros-blank-slate {
   position: absolute;
-  top: 50%;
+  top: 70%;
   margin-top: -78px;
   padding-top: 140px;
   color: #D7D7D7;

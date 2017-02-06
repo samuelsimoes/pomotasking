@@ -10,8 +10,8 @@ let Element = SortableElement(({pomodoro, actions, firstItem}) =>
     firstItem={firstItem} />
 )
 
-let List = SortableContainer(({items, actions}) =>
-  <div>
+let List = SortableContainer(({items, actions, children}) =>
+  <div className='pomodoros-container'>
     {items.map((pomodoro, index) =>
       <Element
         pomodoro={pomodoro}
@@ -20,6 +20,7 @@ let List = SortableContainer(({items, actions}) =>
         index={index}
         firstItem={items.indexOf(pomodoro) === 0} />
     )}
+    {children}
   </div>
 )
 
@@ -48,11 +49,7 @@ export default class Pomodoros extends Component {
         <NewPomodoroForm
           onSubmit={(description) => this.props.actions.newPomodoro(description)} />
 
-        <div className='pomodoros-container'>
-          {this.renderList()}
-          {this.renderShowFinishedButton()}
-          {this.renderFinishedList()}
-        </div>
+        {this.renderList()}
       </div>
     )
   }
@@ -63,6 +60,7 @@ export default class Pomodoros extends Component {
     return (
       <button
         className='pomodoros-list-finished-separator'
+        key='show-finished-pomodoro-button'
         type='button'
         onClick={() => this.setState({ showingFinished: !this.state.showingFinished })}>
         {this.state.showingFinished ? 'Hide' : 'Show'} Completed ({this.props.finishedPomodoros.length})
@@ -98,6 +96,10 @@ export default class Pomodoros extends Component {
             this.props.actions.updateWaitingPomodorosOrder(newOrder)
           }}
           shouldCancelStart={(evt) => evt.target.tagName !== 'P'}
+          children={[
+            this.renderShowFinishedButton(),
+            this.renderFinishedList()
+          ]}
           actions={this.props.actions} />
       )
     } else {
