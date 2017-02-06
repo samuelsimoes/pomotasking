@@ -30,9 +30,9 @@ export function newPomodoro (description) {
       id
     })
 
-    let pomodoroData = getStore().pomodoros.find(pomodoro => pomodoro.id === id)
+    let state = getStore()
 
-    pomodorosRepository.persistPomodoro(pomodoroData)
+    pomodorosRepository.persistPomodoros(state.currentListID, state.pomodoros)
   }
 }
 

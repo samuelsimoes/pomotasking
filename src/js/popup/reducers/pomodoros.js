@@ -9,6 +9,26 @@ function finishedPomodoro (todo, now) {
   }
 }
 
+function listWithNewPomodoro (state, currentListID, data) {
+  let notWaitingPomodoros =
+      state.filter(pomodoro => pomodoro.status !== pomodoroStatuses.WAITING)
+
+  let waitingPomodoros =
+    state.filter(pomodoro => pomodoro.status === pomodoroStatuses.WAITING)
+
+  return (
+    notWaitingPomodoros
+      .concat([{
+        id: data.id,
+        description: data.description,
+        addedAt: data.now,
+        status: pomodoroStatuses.WAITING,
+        listID: currentListID
+      }])
+      .concat(waitingPomodoros)
+  )
+}
+
 export default function (state, currentListID, currentRunningItemID, action) {
   switch (action.type) {
     case actions.UPDATE_POMODORO:
@@ -16,13 +36,7 @@ export default function (state, currentListID, currentRunningItemID, action) {
         return (pomodoro.id === action.id) ? { ...pomodoro, ...action.data } : pomodoro
       })
     case actions.NEW_POMODORO:
-      return state.concat([{
-        id: action.id,
-        description: action.description,
-        addedAt: action.now,
-        status: pomodoroStatuses.WAITING,
-        listID: currentListID
-      }])
+      return listWithNewPomodoro(state, currentListID, action)
     case actions.DESTROY_POMODORO:
       return state.filter(pomodoro => pomodoro.id !== action.id)
     case actions.FINISH_CURRENT_ITEM:
