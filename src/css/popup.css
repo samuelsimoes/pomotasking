@@ -247,7 +247,7 @@ input:focus, button:focus, a:focus {
   margin-bottom: 1px;
   border-bottom: 1px solid #E6E6E6;
   overflow: hidden;
-  height: 46px;
+  height: 43px;
   box-sizing: border-box;
 }
 
@@ -266,26 +266,24 @@ input:focus, button:focus, a:focus {
   color: #968D8D;
   font-size: 13px;
   font-weight: lighter;
-  letter-spacing: 1px;
-  line-height: 46px;
+  line-height: 42px;
 }
 
 .pomodoro-task-form input[type=text] {
   border: none;
   background: transparent;
   padding: 0 10px;
-  line-height: 45px;
+  line-height: 42px;
   width: 100%;
   text-shadow: 0px 1px 0px #fff;
   color: #423b3b;
   font-size: 13px;
   font-weight: lighter;
-  letter-spacing: 1px;
 }
 
 .pomodoro-task-controls {
   position: absolute;
-  top: 14px;
+  top: 12px;
   right: 10px;
   display: none;
 }
