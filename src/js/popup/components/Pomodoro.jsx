@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { POMODORO_MAX_LENGTH } from '../../constants/misc'
 
 export default class Pomodoro extends Component {
   constructor () {
@@ -82,7 +83,7 @@ export default class Pomodoro extends Component {
         className='pomodoro-task-form'>
         <input
           onBlur={this.onBlur}
-          maxLength={68}
+          maxLength={POMODORO_MAX_LENGTH}
           type='text'
           autoFocus
           required

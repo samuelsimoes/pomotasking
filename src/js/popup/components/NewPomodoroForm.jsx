@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { POMODORO_MAX_LENGTH } from '../../constants/misc'
 
 export default class NewPomodoroForm extends Component {
   constructor () {
@@ -28,7 +29,7 @@ export default class NewPomodoroForm extends Component {
         <input
           required
           autoFocus
-          maxLength={68}
+          maxLength={POMODORO_MAX_LENGTH}
           type='text'
           value={this.state.description}
           onChange={this.onChange}
