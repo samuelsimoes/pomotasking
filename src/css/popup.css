@@ -175,7 +175,7 @@ input:focus, button:focus, a:focus {
   height: 100%;
 }
 
-.pomodoros-blank-slate:before {
+.tasks-blank-slate:before {
   font-family: BaseIcons;
   -webkit-font-smoothing: antialiased;
   display: block;
@@ -188,7 +188,7 @@ input:focus, button:focus, a:focus {
   top: 0;
 }
 
-.pomodoros-blank-slate {
+.tasks-blank-slate {
   position: absolute;
   top: 70%;
   margin-top: -78px;
@@ -200,30 +200,30 @@ input:focus, button:focus, a:focus {
   text-align: center;
 }
 
-.pomodoros-without-list {
+.tasks-without-list {
   top: 62%;
 }
 
-.pomodoros-without-list:before {
+.tasks-without-list:before {
   content: '\f071';
 }
 
-.pomodoros-list-empty:before {
+.tasks-list-empty:before {
   content: '\f0a6';
 }
 
-.new-pomodoro-form {
+.new-task-form {
   position: relative;
   z-index: 1;
   box-shadow: 0 0 11px #b3b3b3;
   padding: 10px;
 }
 
-.new-pomodoro-form input[type=text]::-webkit-input-placeholder {
+.new-task-form input[type=text]::-webkit-input-placeholder {
   color: #d2d0d0;
 }
 
-.new-pomodoro-form input[type=text] {
+.new-task-form input[type=text] {
   border: none;
   font-size: 15px;
   padding: 10px;
@@ -233,7 +233,7 @@ input:focus, button:focus, a:focus {
   width: 100%;
 }
 
-.pomodoros-container {
+.tasks-container {
   width: 100%;
   overflow: scroll;
   position: absolute;
@@ -241,7 +241,7 @@ input:focus, button:focus, a:focus {
   bottom: 0;
 }
 
-.pomodoro-task {
+.task {
   position: relative;
   background: #f6f6f6;
   margin-bottom: 1px;
@@ -251,15 +251,15 @@ input:focus, button:focus, a:focus {
   box-sizing: border-box;
 }
 
-.pomodoro-task.editable {
+.task.editable {
   cursor: pointer;
 }
 
-.pomodoro-task.finished {
+.task.finished {
   opacity: 0.6;
 }
 
-.pomodoro-task-name {
+.task-name {
   text-shadow: 0px 1px 0px #fff;
   margin: 0;
   padding: 0 10px;
@@ -269,7 +269,7 @@ input:focus, button:focus, a:focus {
   line-height: 42px;
 }
 
-.pomodoro-task-form input[type=text] {
+.task-form input[type=text] {
   border: none;
   background: transparent;
   padding: 0 10px;
@@ -281,18 +281,18 @@ input:focus, button:focus, a:focus {
   font-weight: lighter;
 }
 
-.pomodoro-task-controls {
+.task-controls {
   position: absolute;
   top: 12px;
   right: 10px;
   display: none;
 }
 
-.pomodoro-task:hover .pomodoro-task-controls {
+.task:hover .task-controls {
   display: block;
 }
 
-.pomodoro-task-controls .control-button {
+.task-controls .control-button {
   display: inline-block;
   padding: 0;
   border: 0;
@@ -304,7 +304,7 @@ input:focus, button:focus, a:focus {
   width: 20px;
 }
 
-.pomodoro-task-controls .control-button:before {
+.task-controls .control-button:before {
   text-shadow: 0px 2px 0px white;
   color: #acaaaa;
   font-size: 17px;
@@ -319,19 +319,19 @@ input:focus, button:focus, a:focus {
   -webkit-font-smoothing: antialiased;
 }
 
-.pomodoro-task-controls .control-button:hover:before {
+.task-controls .control-button:hover:before {
   color: #878080;
 }
 
-.pomodoro-task-controls .control-button.start:before {
+.task-controls .control-button.start:before {
   content: '\f04b';
 }
 
-.pomodoro-task-controls .control-button.destroy:before {
+.task-controls .control-button.destroy:before {
   content: '\f014';
 }
 
-.pomodoro-task-controls .control-button.edit:before {
+.task-controls .control-button.edit:before {
   content: '\f040';
 }
 
@@ -406,7 +406,7 @@ input:focus, button:focus, a:focus {
   font-weight: bolder;
 }
 
-.pomodoros-list-finished-separator {
+.tasks-list-finished-separator {
   width: 100%;
   background: #f1f1f1;
   color: #7b7b7b;

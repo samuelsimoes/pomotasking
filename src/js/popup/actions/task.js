@@ -1,30 +1,30 @@
 import * as actions from '../constants/actionTypes'
 import uuid from 'uuid/v1'
-import * as pomodorosRepository from '../../repositories/pomodoros'
+import * as tasksRepository from '../../repositories/tasks'
 import * as runningItemRepository from '../../repositories/runningItem'
-import * as pomodoroStatuses from '../../constants/pomodoroStatuses'
+import * as taskStatuses from '../../constants/taskStatuses'
 import * as runtimeEvents from '../../utils/runtimeEvents'
 import { finishItem } from './counter'
 
-export function updateWaitingPomodorosOrder (intendedWaitingOrder) {
+export function updateWaitingTasksOrder (intendedWaitingOrder) {
   return function (dispatch, getStore) {
     dispatch({
-      type: actions.UPDATE_WAITING_POMODOROS_ORDER,
+      type: actions.UPDATE_WAITING_TASK_ORDER,
       intendedWaitingOrder
     })
 
     let state = getStore()
 
-    pomodorosRepository.persistPomodoros(state.currentListID, state.pomodoros)
+    tasksRepository.persistTasks(state.currentListID, state.tasks)
   }
 }
 
-export function newPomodoro (description) {
+export function newTask (description) {
   let id = uuid()
 
   return function (dispatch, getStore) {
     dispatch({
-      type: actions.NEW_POMODORO,
+      type: actions.NEW_TASK,
       description,
       now: new Date(),
       id
@@ -32,19 +32,19 @@ export function newPomodoro (description) {
 
     let state = getStore()
 
-    pomodorosRepository.persistPomodoros(state.currentListID, state.pomodoros)
+    tasksRepository.persistTasks(state.currentListID, state.tasks)
   }
 }
 
 export function update (id, data) {
   return function (dispatch, getStore) {
     dispatch({
-      type: actions.UPDATE_POMODORO,
+      type: actions.UPDATE_TASK,
       id,
       data
     })
 
-    pomodorosRepository.persistPomodoro(getStore().pomodoros.find(pomodoro => pomodoro.id === id))
+    tasksRepository.persistTask(getStore().tasks.find(task => task.id === id))
   }
 }
 
@@ -53,7 +53,7 @@ export function start (id) {
     dispatch(finishItem())
 
     dispatch({
-      type: actions.START_POMODORO,
+      type: actions.START_TASK,
       now: new Date(),
       id
     })
@@ -62,11 +62,11 @@ export function start (id) {
 
     runningItemRepository.persist(runningItem)
 
-    pomodorosRepository.persistPomodoro({
+    tasksRepository.persistTask({
       id: id,
       listID: runningItem.listID,
       startedAt: new Date(),
-      status: pomodoroStatuses.RUNNING
+      status: taskStatuses.RUNNING
     })
 
     runtimeEvents.startBadgeCounter()
@@ -76,10 +76,10 @@ export function start (id) {
 export function destroy (id) {
   return function (dispatch, getStore) {
     dispatch({
-      type: actions.DESTROY_POMODORO,
+      type: actions.DESTROY_TASK,
       id
     })
 
-    pomodorosRepository.deletePomodoro(getStore().currentListID, id)
+    tasksRepository.deleteTask(getStore().currentListID, id)
   }
 }

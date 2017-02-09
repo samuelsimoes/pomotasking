@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 
-export default class PomodoroListLink extends PureComponent {
+export default class TaskListLink extends PureComponent {
   constructor () {
     super(...arguments)
 

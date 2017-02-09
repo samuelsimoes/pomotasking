@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Sidebar from '../containers/Sidebar'
 import Counter from '../containers/Counter'
-import Pomodoros from '../containers/Pomodoros'
+import Tasks from '../containers/Tasks'
 import appReducer from '../reducers/app'
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
@@ -26,7 +26,7 @@ export default class App extends Component {
 
           <div className='content-container'>
             <Counter />
-            <Pomodoros />
+            <Tasks />
           </div>
         </div>
       </Provider>

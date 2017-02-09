@@ -1,1 +1,1 @@
-export const POMODORO_MAX_LENGTH = 85
+export const TASK_MAX_LENGTH = 85

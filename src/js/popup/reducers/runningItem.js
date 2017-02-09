@@ -1,19 +1,19 @@
 import * as actions from '../constants/actionTypes'
 import * as runnableTypes from '../../constants/runnableTypes'
 
-export default function (state = null, pomodoros, action) {
+export default function (state = null, tasks, action) {
   switch (action.type) {
-    case actions.START_POMODORO:
-      let runningPomodoro = pomodoros.find(pomodoro => pomodoro.id === action.id)
+    case actions.START_TASK:
+      let runningTask = tasks.find(task => task.id === action.id)
 
       return {
-        id: runningPomodoro.id,
-        type: runnableTypes.POMODORO,
-        description: runningPomodoro.description,
+        id: runningTask.id,
+        type: runnableTypes.TASK,
+        description: runningTask.description,
         startedAt: action.now,
-        listID: runningPomodoro.listID
+        listID: runningTask.listID
       }
-    case actions.DESTROY_POMODORO_LIST:
+    case actions.DESTROY_TASK_LIST:
       if (state && state.listID === action.id) {
         return null
       } else {

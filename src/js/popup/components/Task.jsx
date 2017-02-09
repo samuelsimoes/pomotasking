@@ -1,27 +1,27 @@
 import React, { Component } from 'react'
-import { POMODORO_MAX_LENGTH } from '../../constants/misc'
+import { TASK_MAX_LENGTH } from '../../constants/misc'
 
-export default class Pomodoro extends Component {
+export default class Task extends Component {
   constructor () {
     super(...arguments)
 
-    this.start = this.props.actions.start.bind(null, this.props.pomodoro.id)
-    this.destroy = this.props.actions.destroy.bind(null, this.props.pomodoro.id)
-    this.update = this.props.actions.update.bind(null, this.props.pomodoro.id)
+    this.start = this.props.actions.start.bind(null, this.props.task.id)
+    this.destroy = this.props.actions.destroy.bind(null, this.props.task.id)
+    this.update = this.props.actions.update.bind(null, this.props.task.id)
     this.startEdit = this.startEdit.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
     this.onBlur = this.onBlur.bind(this)
 
     this.state = {
       editing: false,
-      description: this.props.pomodoro.description
+      description: this.props.task.description
     }
   }
 
   startEdit () {
     this.setState({
       editing: true,
-      description: this.props.pomodoro.description
+      description: this.props.task.description
     })
   }
 
@@ -33,10 +33,10 @@ export default class Pomodoro extends Component {
     return (
       <div>
         <p
-          className='pomodoro-task-name'>
-          {this.props.pomodoro.description}
+          className='task-name'>
+          {this.props.task.description}
         </p>
-        <div className='pomodoro-task-controls'>
+        <div className='task-controls'>
           {this.renderStartButton()}
 
           <button
@@ -80,10 +80,10 @@ export default class Pomodoro extends Component {
     return (
       <form
         onSubmit={this.onSubmit}
-        className='pomodoro-task-form'>
+        className='task-form'>
         <input
           onBlur={this.onBlur}
-          maxLength={POMODORO_MAX_LENGTH}
+          maxLength={TASK_MAX_LENGTH}
           type='text'
           autoFocus
           required
@@ -96,7 +96,7 @@ export default class Pomodoro extends Component {
   render () {
     return (
       <div
-        className='pomodoro-task editable'>
+        className='task editable'>
         {this.state.editing ? this.renderForm() : this.renderTaskName()}
       </div>
     )

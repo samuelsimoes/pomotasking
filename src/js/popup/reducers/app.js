@@ -1,5 +1,5 @@
 import listReducer from './list'
-import pomodorosReducer from './pomodoros'
+import tasksReducer from './tasks'
 import runningItemReducer from './runningItem'
 import currentListIDReducer from './currentListID'
 import * as appRepository from '../../repositories/app'
@@ -10,11 +10,11 @@ export default function (state = appRepository.getState(), action) {
     lists: listReducer(state.lists, action),
     runningItem: runningItemReducer(
       state.runningItem,
-      state.pomodoros,
+      state.tasks,
       action
     ),
-    pomodoros: pomodorosReducer(
-      state.pomodoros,
+    tasks: tasksReducer(
+      state.tasks,
       state.currentListID,
       state.runningItem ? state.runningItem.id : null,
       action

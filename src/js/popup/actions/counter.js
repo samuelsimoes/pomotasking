@@ -1,9 +1,9 @@
 import uuid from 'uuid/v1'
 import * as actions from '../constants/actionTypes'
 import * as runningItemRepository from '../../repositories/runningItem'
-import * as pomodoroStatuses from '../../constants/pomodoroStatuses'
+import * as taskStatuses from '../../constants/taskStatuses'
 import * as runnableTypes from '../../constants/runnableTypes'
-import * as pomodorosRepository from '../../repositories/pomodoros'
+import * as tasksRepository from '../../repositories/tasks'
 import * as runtimeEvents from '../../utils/runtimeEvents'
 
 export function startPause (pauseType) {
@@ -35,12 +35,12 @@ export function finishItem () {
       now: now
     })
 
-    if (runningItem && runningItem.type === runnableTypes.POMODORO) {
-      pomodorosRepository.persistPomodoro({
+    if (runningItem && runningItem.type === runnableTypes.TASK) {
+      tasksRepository.persistTask({
         id: runningItem.id,
         listID: runningItem.listID,
         finishedAt: now,
-        status: pomodoroStatuses.FINISHED
+        status: taskStatuses.FINISHED
       })
     }
 
@@ -58,12 +58,12 @@ export function cancelItem () {
       type: actions.CANCEL_CURRENT_ITEM
     })
 
-    if (runningItem && runningItem.type === runnableTypes.POMODORO) {
-      pomodorosRepository.persistPomodoro({
+    if (runningItem && runningItem.type === runnableTypes.TASK) {
+      tasksRepository.persistTask({
         id: runningItem.id,
         listID: runningItem.listID,
         startedAt: null,
-        status: pomodoroStatuses.WAITING
+        status: taskStatuses.WAITING
       })
     }
 

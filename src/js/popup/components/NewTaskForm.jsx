@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { POMODORO_MAX_LENGTH } from '../../constants/misc'
+import { TASK_MAX_LENGTH } from '../../constants/misc'
 
-export default class NewPomodoroForm extends Component {
+export default class NewTaskForm extends Component {
   constructor () {
     super(...arguments)
 
@@ -25,15 +25,15 @@ export default class NewPomodoroForm extends Component {
     return (
       <form
         onSubmit={this.onSubmit}
-        className='new-pomodoro-form'>
+        className='new-task-form'>
         <input
           required
           autoFocus
-          maxLength={POMODORO_MAX_LENGTH}
+          maxLength={TASK_MAX_LENGTH}
           type='text'
           value={this.state.description}
           onChange={this.onChange}
-          placeholder='New pomodoro task' />
+          placeholder='New task description' />
       </form>
     )
   }

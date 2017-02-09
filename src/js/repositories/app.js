@@ -1,6 +1,6 @@
 import * as listsRepository from './lists'
-import * as pomodorosRepository from './pomodoros'
-import * as runningItemPomodoro from './runningItem'
+import * as tasksRepository from './tasks'
+import * as runningItemTask from './runningItem'
 
 export function getState () {
   let lists = listsRepository.getLists()
@@ -9,7 +9,7 @@ export function getState () {
   return {
     currentListID: activeList.id,
     lists: lists,
-    runningItem: runningItemPomodoro.get(),
-    pomodoros: pomodorosRepository.getPomodoros(activeList.id)
+    runningItem: runningItemTask.get(),
+    tasks: tasksRepository.getTasks(activeList.id)
   }
 }

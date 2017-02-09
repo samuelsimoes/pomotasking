@@ -15,7 +15,7 @@ export function deleteList (listID) {
     JSON.stringify(lists)
   )
 
-  window.localStorage.removeItem(`pomodoro-list-${listID}`)
+  window.localStorage.removeItem(`task-list-${listID}`)
 }
 
 export function persistList (listData) {

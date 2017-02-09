@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import PomodoroListLink from './PomodoroListLink'
+import TaskListLink from './TaskListLink'
 
 export default class Sidebar extends Component {
   render () {
@@ -33,10 +33,10 @@ export default class Sidebar extends Component {
   renderLists () {
     return this.props.lists.map((list) => {
       return (
-        <PomodoroListLink
+        <TaskListLink
           data={list}
           actions={this.props.actions}
-          key={`pomodoro-list-${list.id}`} />
+          key={`task-list-${list.id}`} />
       )
     })
   }

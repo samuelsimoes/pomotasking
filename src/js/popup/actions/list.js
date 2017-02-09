@@ -1,12 +1,12 @@
 import * as actions from '../constants/actionTypes'
-import * as pomodorosRepository from '../../repositories/pomodoros'
+import * as tasksRepository from '../../repositories/tasks'
 import * as listsRepository from '../../repositories/lists'
 import { finishItem } from './counter'
 import uuid from 'uuid/v1'
 
 export function startEdit (id) {
   return {
-    type: actions.START_EDIT_POMODORO_LIST,
+    type: actions.START_EDIT_TASK_LIST,
     id
   }
 }
@@ -15,14 +15,14 @@ export function buildList () {
   let id = uuid()
 
   return {
-    type: actions.BUILD_NEW_POMODORO_LIST,
+    type: actions.BUILD_NEW_TASK_LIST,
     id
   }
 }
 
 export function cancelEdit (id) {
   return {
-    type: actions.CANCEL_EDIT_POMODORO_LIST,
+    type: actions.CANCEL_EDIT_TASK_LIST,
     id
   }
 }
@@ -33,7 +33,7 @@ export function submitEdit (id) {
     let newItem = !editedList.name
 
     dispatch({
-      type: actions.SUBMIT_EDIT_POMODORO_LIST,
+      type: actions.SUBMIT_EDIT_TASK_LIST,
       id
     })
 
@@ -49,7 +49,7 @@ export function submitEdit (id) {
 
 export function update (id, data) {
   return {
-    type: actions.UPDATE_POMODORO_LIST,
+    type: actions.UPDATE_TASK_LIST,
     id,
     data
   }
@@ -66,7 +66,7 @@ export function destroy (id) {
     }
 
     dispatch({
-      type: actions.DESTROY_POMODORO_LIST,
+      type: actions.DESTROY_TASK_LIST,
       id
     })
 
@@ -80,15 +80,15 @@ export function destroy (id) {
   }
 }
 
-export function loadedPomodoros (pomodoros) {
+export function loadedTasks (tasks) {
   return {
-    type: actions.LOADED_POMODOROS,
-    pomodoros
+    type: actions.LOADED_TASKS,
+    tasks
   }
 }
 
 export function choose (id) {
-  let pomodoros = pomodorosRepository.getPomodoros(id)
+  let tasks = tasksRepository.getTasks(id)
 
   return function (dispatch, getStore) {
     let previousActiveList = getStore().lists.find(list => list.active)
@@ -98,11 +98,11 @@ export function choose (id) {
     }
 
     dispatch({
-      type: actions.CHOOSE_POMODORO_LIST,
+      type: actions.CHOOSE_TASK_LIST,
       id
     })
 
-    dispatch(loadedPomodoros(pomodoros))
+    dispatch(loadedTasks(tasks))
 
     listsRepository.persistList({ id, active: true })
   }
