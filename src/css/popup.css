@@ -292,7 +292,7 @@ input:focus, button:focus, a:focus {
   display: block;
 }
 
-.task-controls .control-button {
+.task-control-button {
   display: inline-block;
   padding: 0;
   border: 0;
@@ -304,7 +304,7 @@ input:focus, button:focus, a:focus {
   width: 20px;
 }
 
-.task-controls .control-button:before {
+.task-control-button:before {
   text-shadow: 0px 2px 0px white;
   color: #acaaaa;
   font-size: 17px;
@@ -319,19 +319,19 @@ input:focus, button:focus, a:focus {
   -webkit-font-smoothing: antialiased;
 }
 
-.task-controls .control-button:hover:before {
+.task-control-button:hover:before {
   color: #878080;
 }
 
-.task-controls .control-button.start:before {
+.task-control-button.start:before {
   content: '\f04b';
 }
 
-.task-controls .control-button.destroy:before {
+.task-control-button.destroy:before {
   content: '\f014';
 }
 
-.task-controls .control-button.edit:before {
+.task-control-button.edit:before {
   content: '\f040';
 }
 

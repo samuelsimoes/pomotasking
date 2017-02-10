@@ -40,14 +40,14 @@ export default class Task extends Component {
           {this.renderStartButton()}
 
           <button
-            className='control-button edit'
+            className='task-control-button edit'
             onClick={this.startEdit}
             type='button'>
             Edit
           </button>
 
           <button
-            className='control-button destroy'
+            className='task-control-button destroy'
             onClick={this.destroy}
             type='button'>
             Destroy
@@ -62,7 +62,7 @@ export default class Task extends Component {
 
     return (
       <button
-        className='control-button start'
+        className='task-control-button start'
         onClick={this.start}
         type='button'>
         Start
