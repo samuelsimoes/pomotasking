@@ -335,6 +335,36 @@ input:focus, button:focus, a:focus {
   content: '\f040';
 }
 
+.task-control-button.finish:before {
+  content: '\f00c';
+}
+
+.task.running {
+  border-bottom: 1px solid #e4e4ae;
+  background: #fbfbd8;
+}
+
+.task.running .task-name {
+  color: #848444;
+}
+
+.task-pomodoros {
+  position: absolute;
+  top: 0;
+  left: 1px;
+  height: 2px;
+  font-size: 0;
+}
+
+.task-pomodoro-sign {
+  position: relative;
+  display: inline-block;
+  width: 12px;
+  height: 1px;
+  background: #f38181;
+  margin-right: 3px;
+}
+
 .main-counter {
   position: relative;
   z-index: 2;

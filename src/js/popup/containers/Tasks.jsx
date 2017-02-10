@@ -7,7 +7,7 @@ import * as taskStatuses from '../../constants/taskStatuses'
 function mapStateToProps (state) {
   return {
     tasks: state.tasks,
-    waitingTasks: state.tasks.filter(task => task.status === taskStatuses.WAITING),
+    notFinishedTasks: state.tasks.filter(task => task.status !== taskStatuses.FINISHED),
     finishedTasks: state.tasks.filter(task => task.status === taskStatuses.FINISHED).reverse(),
     currentListID: state.currentListID
   }

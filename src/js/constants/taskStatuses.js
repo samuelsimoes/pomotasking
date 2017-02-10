@@ -1,3 +1,3 @@
 export const FINISHED = 'FINISHED'
 export const RUNNING = 'RUNNING'
-export const WAITING = 'WAITING'
+export const OPEN = 'OPEN'

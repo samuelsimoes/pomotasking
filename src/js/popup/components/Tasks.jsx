@@ -3,11 +3,10 @@ import NewTaskForm from './NewTaskForm'
 import Task from './Task'
 import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc'
 
-let Element = SortableElement(({task, actions, firstItem}) =>
+let Element = SortableElement(({task, actions}) =>
   <Task
     actions={actions}
-    task={task}
-    firstItem={firstItem} />
+    task={task} />
 )
 
 let List = SortableContainer(({items, actions, children}) =>
@@ -17,8 +16,7 @@ let List = SortableContainer(({items, actions, children}) =>
         task={task}
         actions={actions}
         key={`task-item-${task.id}`}
-        index={index}
-        firstItem={items.indexOf(task) === 0} />
+        index={index} />
     )}
     {children}
   </div>
@@ -87,13 +85,13 @@ export default class Tasks extends Component {
     if (this.props.tasks.length) {
       return (
         <List
-          items={this.props.waitingTasks}
+          items={this.props.notFinishedTasks}
           onSortEnd={({oldIndex, newIndex}) => {
-            let newArrange = arrayMove(this.props.waitingTasks, oldIndex, newIndex)
+            let newArrange = arrayMove(this.props.notFinishedTasks, oldIndex, newIndex)
 
             let newOrder = newArrange.map(task => task.id)
 
-            this.props.actions.updateWaitingTasksOrder(newOrder)
+            this.props.actions.updateOpenedTasksOrder(newOrder)
           }}
           shouldCancelStart={(evt) => evt.target.tagName !== 'P'}
           children={[

@@ -6,7 +6,14 @@ export function getTasks (listID) {
       ...task,
       addedAt: task.addedAt ? (new Date(task.addedAt)) : null,
       startedAt: task.startedAt ? (new Date(task.startedAt)) : null,
-      finishedAt: task.finishedAt ? (new Date(task.finishedAt)) : null
+      finishedAt: task.finishedAt ? (new Date(task.finishedAt)) : null,
+      pomodoros: task.pomodoros.map(pomodoro => {
+        return {
+          ...pomodoro,
+          startedAt: pomodoro.startedAt ? (new Date(pomodoro.startedAt)) : null,
+          finishedAt: pomodoro.finishedAt ? (new Date(pomodoro.finishedAt)) : null
+        }
+      })
     }
   })
 }
@@ -15,30 +22,6 @@ export function persistTasks (listID, tasks) {
   window.localStorage.setItem(
     `task-list-${listID}`,
     JSON.stringify(tasks)
-  )
-}
-
-export function persistTask (taskData) {
-  let currentList = getTasks(taskData.listID)
-  let newList
-  let updated
-
-  newList = currentList.map(task => {
-    if (task.id === taskData.id) {
-      updated = true
-      return { ...task, ...taskData }
-    } else {
-      return task
-    }
-  })
-
-  if (!updated) {
-    newList = newList.concat(taskData)
-  }
-
-  window.localStorage.setItem(
-    `task-list-${taskData.listID}`,
-    JSON.stringify(newList)
   )
 }
 

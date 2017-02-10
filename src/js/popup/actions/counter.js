@@ -1,10 +1,10 @@
 import uuid from 'uuid/v1'
 import * as actions from '../constants/actionTypes'
 import * as runningItemRepository from '../../repositories/runningItem'
-import * as taskStatuses from '../../constants/taskStatuses'
 import * as runnableTypes from '../../constants/runnableTypes'
 import * as tasksRepository from '../../repositories/tasks'
 import * as runtimeEvents from '../../utils/runtimeEvents'
+import taskReducer from '../reducers/tasks'
 
 export function startPause (pauseType) {
   let id = uuid()
@@ -27,7 +27,8 @@ export function startPause (pauseType) {
 
 export function finishItem () {
   return function (dispatch, getStore) {
-    let runningItem = getStore().runningItem
+    let state = getStore()
+    let runningItem = state.runningItem
     let now = new Date()
 
     dispatch({
@@ -35,14 +36,22 @@ export function finishItem () {
       now: now
     })
 
-    if (runningItem && runningItem.type === runnableTypes.TASK) {
-      tasksRepository.persistTask({
-        id: runningItem.id,
-        listID: runningItem.listID,
-        finishedAt: now,
-        status: taskStatuses.FINISHED
+    if (runningItem &&
+        runningItem.type === runnableTypes.POMODORO &&
+        runningItem.listID !== state.currentListID) {
+      let list = tasksRepository.getTasks(runningItem.listID)
+
+      list = taskReducer(list, null, runningItem.id, {
+        type: actions.FINISH_CURRENT_ITEM,
+        now: now
       })
+
+      tasksRepository.persistTasks(runningItem.listID, list)
     }
+
+    state = getStore()
+
+    tasksRepository.persistTasks(state.currentListID, state.tasks)
 
     runningItemRepository.persist(null)
 
@@ -52,20 +61,13 @@ export function finishItem () {
 
 export function cancelItem () {
   return function (dispatch, getStore) {
-    let runningItem = getStore().runningItem
-
     dispatch({
       type: actions.CANCEL_CURRENT_ITEM
     })
 
-    if (runningItem && runningItem.type === runnableTypes.TASK) {
-      tasksRepository.persistTask({
-        id: runningItem.id,
-        listID: runningItem.listID,
-        startedAt: null,
-        status: taskStatuses.WAITING
-      })
-    }
+    let state = getStore()
+
+    tasksRepository.persistTasks(state.currentListID, state.tasks)
 
     runningItemRepository.persist(null)
 

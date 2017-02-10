@@ -3,14 +3,15 @@ import * as runnableTypes from '../../constants/runnableTypes'
 
 export default function (state = null, tasks, action) {
   switch (action.type) {
-    case actions.START_TASK:
+    case actions.START_POMODORO:
       let runningTask = tasks.find(task => task.id === action.id)
 
       return {
-        id: runningTask.id,
-        type: runnableTypes.TASK,
+        id: action.id,
+        type: runnableTypes.POMODORO,
         description: runningTask.description,
         startedAt: action.now,
+        taskID: action.taskID,
         listID: runningTask.listID
       }
     case actions.DESTROY_TASK_LIST:

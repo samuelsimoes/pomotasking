@@ -1,10 +1,13 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
+import { RUNNING } from '../../constants/taskStatuses'
 import { TASK_MAX_LENGTH } from '../../constants/misc'
+import TaskPomodoros from './TaskPomodoros'
 
-export default class Task extends Component {
+export default class Task extends PureComponent {
   constructor () {
     super(...arguments)
 
+    this.finish = this.props.actions.finish.bind(null, this.props.task.id)
     this.start = this.props.actions.start.bind(null, this.props.task.id)
     this.destroy = this.props.actions.destroy.bind(null, this.props.task.id)
     this.update = this.props.actions.update.bind(null, this.props.task.id)
@@ -36,37 +39,49 @@ export default class Task extends Component {
           className='task-name'>
           {this.props.task.description}
         </p>
-        <div className='task-controls'>
-          {this.renderStartButton()}
 
-          <button
-            className='task-control-button edit'
-            onClick={this.startEdit}
-            type='button'>
-            Edit
-          </button>
+        <TaskPomodoros
+          taskID={this.props.task.id}
+          pomodoros={this.props.task.pomodoros} />
 
-          <button
-            className='task-control-button destroy'
-            onClick={this.destroy}
-            type='button'>
-            Destroy
-          </button>
-        </div>
+        {this.renderControlButtons()}
       </div>
     )
   }
 
-  renderStartButton () {
-    if (!this.props.firstItem) { return }
+  renderControlButtons () {
+    if (this.props.task.status === RUNNING) { return }
 
     return (
-      <button
-        className='task-control-button start'
-        onClick={this.start}
-        type='button'>
-        Start
-      </button>
+      <div className='task-controls'>
+        <button
+          className='task-control-button finish'
+          onClick={this.finish}
+          type='button'>
+          Finish
+        </button>
+
+        <button
+          className='task-control-button start'
+          onClick={this.start}
+          type='button'>
+          Start
+        </button>
+
+        <button
+          className='task-control-button edit'
+          onClick={this.startEdit}
+          type='button'>
+          Edit
+        </button>
+
+        <button
+          className='task-control-button destroy'
+          onClick={this.destroy}
+          type='button'>
+          Destroy
+        </button>
+      </div>
     )
   }
 
@@ -96,7 +111,7 @@ export default class Task extends Component {
   render () {
     return (
       <div
-        className='task editable'>
+        className={`task editable ${this.props.task.status.toLowerCase()}`}>
         {this.state.editing ? this.renderForm() : this.renderTaskName()}
       </div>
     )

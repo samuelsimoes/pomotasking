@@ -1,88 +1,126 @@
 import * as actions from '../constants/actionTypes'
 import * as taskStatuses from '../../constants/taskStatuses'
 
-function finishedTask (todo, now) {
+function cancelPomodoro (task) {
+  let pomodoros = task.pomodoros.filter(pomodoro => !pomodoro.running)
+
   return {
-    ...todo,
-    finishedAt: now,
-    status: taskStatuses.FINISHED
+    ...task,
+    pomodoros: pomodoros,
+    status: taskStatuses.OPEN
+  }
+}
+
+function startPomodoro (task, now) {
+  let pomodoros = task.pomodoros.concat({
+    running: true,
+    startedAt: now
+  })
+
+  return {
+    ...task,
+    pomodoros: pomodoros,
+    status: taskStatuses.RUNNING
+  }
+}
+
+function finishPomodoro (task, now) {
+  let pomodoros = task.pomodoros.map(pomodoro => {
+    if (pomodoro.running) {
+      return {
+        ...pomodoro,
+        running: false,
+        finishedAt: now
+      }
+    } else {
+      return pomodoro
+    }
+  })
+
+  return {
+    ...task,
+    pomodoros: pomodoros,
+    status: taskStatuses.OPEN
   }
 }
 
 function listWithNewTask (state, currentListID, data) {
-  let notWaitingTasks =
-      state.filter(task => task.status !== taskStatuses.WAITING)
+  let finishedTasks =
+      state.filter(task => task.status === taskStatuses.FINISHED)
 
-  let waitingTasks =
-    state.filter(task => task.status === taskStatuses.WAITING)
+  let notFinishedTasks =
+    state.filter(task => task.status !== taskStatuses.FINISHED)
 
   return (
-    notWaitingTasks
+    finishedTasks
       .concat([{
         id: data.id,
         description: data.description,
         addedAt: data.now,
-        status: taskStatuses.WAITING,
-        listID: currentListID
+        status: taskStatuses.OPEN,
+        listID: currentListID,
+        pomodoros: []
       }])
-      .concat(waitingTasks)
+      .concat(notFinishedTasks)
   )
+}
+
+function finishTask (task, now) {
+  return {
+    ...task,
+    status: taskStatuses.FINISHED,
+    finishedAt: now
+  }
 }
 
 export default function (state, currentListID, currentRunningItemID, action) {
   switch (action.type) {
+    case actions.FINISH_TASK:
+      return state.map(task =>
+        (task.id === action.id) ? finishTask(task, action.now) : task
+      )
     case actions.UPDATE_TASK:
-      return state.map(task => {
-        return (task.id === action.id) ? { ...task, ...action.data } : task
-      })
+      return state.map(task =>
+        (task.id === action.id) ? { ...task, ...action.data } : task
+      )
     case actions.NEW_TASK:
       return listWithNewTask(state, currentListID, action)
     case actions.DESTROY_TASK:
       return state.filter(task => task.id !== action.id)
     case actions.FINISH_CURRENT_ITEM:
       return state.map(task =>
-        (task.id === currentRunningItemID) ? finishedTask(task, action.now) : task
+        (task.id === currentRunningItemID) ? finishPomodoro(task, action.now) : task
       )
-    case actions.START_TASK:
+    case actions.START_POMODORO:
       return state.map(task => {
         let data = task
 
-        if (task.id !== action.id && task.status === taskStatuses.RUNNING) {
-          data = { ...data, startedAt: null, status: taskStatuses.WAITING }
+        if (task.status === taskStatuses.RUNNING) {
+          data = finishPomodoro(data, action.now)
         }
 
         if (task.id === action.id) {
-          data = {
-            ...data,
-            startedAt: action.now,
-            status: taskStatuses.RUNNING
-          }
+          data = startPomodoro(data, action.now)
         }
 
         return data
       })
     case actions.CANCEL_CURRENT_ITEM:
-      return state.map(task => {
-        let data = task
-
-        if (task.id === currentRunningItemID && task.status === taskStatuses.RUNNING) {
-          data = { ...data, startedAt: null, status: taskStatuses.WAITING }
-        }
-
-        return data
-      })
+      return state.map(task =>
+        (task.id === currentRunningItemID) ? cancelPomodoro(task) : task
+      )
     case actions.LOADED_TASKS:
       return action.tasks
-    case actions.UPDATE_WAITING_TASKS_ORDER:
-      let notWaitingTasks =
-        state.filter(task => task.status !== taskStatuses.WAITING)
+    case actions.UPDATE_OPEN_TASKS_ORDER:
+      let finishedTasks =
+        state.filter(task => task.status === taskStatuses.FINISHED)
 
-      let orderedWaitingTasks =
-        action.intendedWaitingOrder.map(taskID =>
+      let orderedNotFinishedTasks =
+        action.intendedOpenedOrder.map(taskID =>
           state.find(task => task.id === taskID)
         )
 
-      return notWaitingTasks.concat(orderedWaitingTasks)
+      return finishedTasks.concat(orderedNotFinishedTasks)
     default:
       return state
   }
