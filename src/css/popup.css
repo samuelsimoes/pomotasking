@@ -215,8 +215,8 @@ input:focus, button:focus, a:focus {
 .new-task-form {
   position: relative;
   z-index: 1;
-  box-shadow: 0 0 11px #b3b3b3;
   padding: 10px;
+  border-bottom: 2px solid #eaeaea;
 }
 
 .new-task-form input[type=text]::-webkit-input-placeholder {
