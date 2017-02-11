@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import * as runnableTypes from '../../constants/runnableTypes'
 import runningItemInfos from '../../utils/runningItemInfos'
 import { presentFullDuration } from '../../utils/presentDuration'
+import * as configsRepository from '../../repositories/configs'
 
 export default class Counter extends Component {
   constructor () {
@@ -9,6 +10,7 @@ export default class Counter extends Component {
 
     this.startShortPause = this.props.actions.startPause.bind(null, runnableTypes.SHORT_PAUSE)
     this.startLongPause = this.props.actions.startPause.bind(null, runnableTypes.LONG_PAUSE)
+    this.configs = configsRepository.get()
   }
 
   componentDidMount () {
@@ -60,14 +62,14 @@ export default class Counter extends Component {
               type='button'
               onClick={this.startLongPause}
               className='counter-action-button'>
-              pause 15 minutes
+              pause {this.configs.longPauseLength} minutes
             </button>
 
             <button
               type='button'
               onClick={this.startShortPause}
               className='counter-action-button'>
-              pause 5 minutes
+              pause {this.configs.shortPauseLength} minutes
             </button>
           </div>
         </div>
