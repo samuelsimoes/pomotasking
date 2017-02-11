@@ -4,6 +4,10 @@
 
 A Chrome extension pomodoro timer integrated with ToDo list.
 
+<p align="center">
+  <img alt="Pomotasking Screenshot" src="misc/screenshot.png" >
+</p>
+
 ## Setup
 
 1. Install [yarn](https://yarnpkg.com): `npm install -g yarn`.
