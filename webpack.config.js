@@ -19,12 +19,12 @@ var config = {
     loaders: [
       { test: /\.(js|jsx)$/, loader: 'babel' },
       { test: /\.css$/, loaders: ['style', 'css'] },
-      { test: /\.(png|ttf)$/, loader: 'file-loader?name=[name].[ext]' },
+      { test: /\.(png|ttf|ogg)$/, loader: 'file-loader?name=[name].[ext]' },
       { test: /\.font\.(js|json)$/, loader: 'style!css!fontgen' }
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx', '.css', '.png']
+    extensions: ['', '.js', '.jsx', '.css', '.png', '.ogg']
   },
   plugins: [
     // expose and write the allowed env vars on the compiled bundle

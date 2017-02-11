@@ -1,3 +1,4 @@
+import '../sounds/ring.ogg'
 import '../img/pomotodo-128.png'
 import '../img/browser-action-icon.png'
 import '../img/pomotodo-notification.png'
@@ -25,6 +26,10 @@ function notifyFinish (name) {
     message: `"${name}" finished.`,
     iconUrl: 'pomotodo-notification.png'
   })
+
+  let audio = new window.Audio('ring.ogg')
+
+  audio.play()
 }
 
 let checkTick
