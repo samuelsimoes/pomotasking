@@ -5,15 +5,21 @@ import * as runningItemRepository from '../../repositories/runningItem'
 import * as runtimeEvents from '../../utils/runtimeEvents'
 import { finishItem } from './counter'
 
-export function finish (id) {
+export function toggleFinish (id) {
   return function (dispatch, getStore) {
+    let state = getStore()
+
+    if (state.runningItem && state.runningItem.id === id) {
+      dispatch(finishItem())
+    }
+
     dispatch({
-      type: actions.FINISH_TASK,
+      type: actions.TOGGLE_FINISH_TASK,
       now: new Date(),
       id
     })
 
-    let state = getStore()
+    state = getStore()
 
     tasksRepository.persistTasks(state.currentListID, state.tasks)
   }

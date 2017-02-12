@@ -65,20 +65,34 @@ function listWithNewTask (state, currentListID, data) {
   )
 }
 
-function finishTask (task, now) {
+function toggleFinishTask (task, now) {
   return {
     ...task,
-    status: taskStatuses.FINISHED,
-    finishedAt: now
+    status: (task.status === taskStatuses.FINISHED ? taskStatuses.OPEN : taskStatuses.FINISHED),
+    finishedAt: (task.status === taskStatuses.FINISHED ? null : now)
   }
+}
+
+function listWithToggleTask (tasks, now, toggleTaskID) {
+  let task = tasks.find(task => task.id === toggleTaskID)
+
+  let finishedTasks =
+    tasks.filter(task => task.status === taskStatuses.FINISHED && task.id !== toggleTaskID)
+
+  let notFinishedTasks =
+    tasks.filter(task => task.status !== taskStatuses.FINISHED && task.id !== toggleTaskID)
+
+  return (
+    finishedTasks
+      .concat([toggleFinishTask(task, now)])
+      .concat(notFinishedTasks)
+  )
 }
 
 export default function (state, currentListID, currentRunningItemID, action) {
   switch (action.type) {
-    case actions.FINISH_TASK:
-      return state.map(task =>
-        (task.id === action.id) ? finishTask(task, action.now) : task
-      )
+    case actions.TOGGLE_FINISH_TASK:
+      return listWithToggleTask(state, action.now, action.id)
     case actions.UPDATE_TASK:
       return state.map(task =>
         (task.id === action.id) ? { ...task, ...action.data } : task

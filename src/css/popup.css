@@ -261,8 +261,7 @@ input:focus, button:focus, a:focus {
 
 .task-name {
   text-shadow: 0px 1px 0px #fff;
-  margin: 0;
-  padding: 0 10px;
+  margin: 0 30px;
   color: #968D8D;
   font-size: 13px;
   font-weight: lighter;
@@ -336,7 +335,21 @@ input:focus, button:focus, a:focus {
 }
 
 .task-control-button.finish:before {
-  content: '\f00c';
+  content: '\f0c8';
+}
+
+.task-control-button.unfinish:before {
+  content: '\f14a';
+}
+
+.task-control-button.finish-toggle {
+  position: absolute;
+  left: 5px;
+  top: 13px;
+}
+
+.task-control-button.unfinish {
+  left: 6px;
 }
 
 .task.running {
@@ -346,6 +359,14 @@ input:focus, button:focus, a:focus {
 
 .task.running .task-name {
   color: #848444;
+}
+
+.task.running .task-control-button:before {
+  color: #b9b97c;
+}
+
+.task.running .task-control-button:hover:before {
+  color: #98985c;
 }
 
 .task-pomodoros {

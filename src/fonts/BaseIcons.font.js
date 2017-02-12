@@ -6,7 +6,8 @@ module.exports = {
   'classPrefix': 'bi-',
   'baseClass': 'bi',
   'codepoints': {
-    'check': '0xF00C',
+    'square-o': '0xF0C8',
+    'check-square': '0xF14A',
     'play': '0xF04B',
     'pencil': '0xF040',
     'trash': '0xF014',

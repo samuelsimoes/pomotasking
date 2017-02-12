@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import NewTaskForm from './NewTaskForm'
 import Task from './Task'
 import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc'
-import TaskPomodoros from './TaskPomodoros'
 
 let Element = SortableElement(({task, actions}) =>
   <Task
@@ -71,18 +70,10 @@ export default class Tasks extends Component {
     if (!this.state.showingFinished) { return }
 
     return this.props.finishedTasks.map(task =>
-      <div
+      <Task
         key={`finished-task-${task.id}`}
-        className='task finished'>
-        <p
-          className='task-name'>
-          {task.description}
-        </p>
-
-        <TaskPomodoros
-          taskID={task.id}
-          pomodoros={task.pomodoros} />
-      </div>
+        task={task}
+        actions={this.props.actions} />
     )
   }
 

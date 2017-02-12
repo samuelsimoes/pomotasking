@@ -1,21 +1,36 @@
 import React, { Component } from 'react'
 import TaskPomodoros from './TaskPomodoros'
-import { RUNNING } from '../../constants/taskStatuses'
+import { OPEN, FINISHED } from '../../constants/taskStatuses'
 
 export default class TaskRow extends Component {
   constructor () {
     super(...arguments)
 
     this.startEdit = this.startEdit.bind(this)
-    this.finish = this.props.actions.finish.bind(null, this.props.task.id)
+    this.toggleFinish = this.props.actions.toggleFinish.bind(null, this.props.task.id)
     this.start = this.props.actions.start.bind(null, this.props.task.id)
     this.destroy = this.props.actions.destroy.bind(null, this.props.task.id)
     this.update = this.props.actions.update.bind(null, this.props.task.id)
   }
 
+  renderFinisheButton () {
+    let className = this.props.task.status === FINISHED ? 'unfinish' : 'finish'
+
+    return (
+      <button
+        className={`task-control-button finish-toggle ${className}`}
+        onClick={this.toggleFinish}
+        type='button'>
+        Toggle Finish
+      </button>
+    )
+  }
+
   render () {
     return (
       <div>
+        {this.renderFinisheButton()}
+
         <p
           className='task-name'>
           {this.props.task.description}
@@ -35,17 +50,10 @@ export default class TaskRow extends Component {
   }
 
   renderControlButtons () {
-    if (this.props.task.status === RUNNING) { return }
+    if (this.props.task.status !== OPEN) { return }
 
     return (
       <div className='task-controls'>
-        <button
-          className='task-control-button finish'
-          onClick={this.finish}
-          type='button'>
-          Finish
-        </button>
-
         <button
           className='task-control-button start'
           onClick={this.start}
