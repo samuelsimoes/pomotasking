@@ -41,7 +41,7 @@ export default class TaskListLink extends PureComponent {
   className () {
     let className = 'list-link'
 
-    if (this.props.data.active) {
+    if (this.props.active) {
       className += ' active'
     }
 

@@ -5,7 +5,8 @@ import * as actions from '../actions/list'
 
 function mapStateToProps (state) {
   return {
-    lists: state.lists
+    lists: state.lists,
+    currentListID: state.currentListID
   }
 }
 

@@ -4,20 +4,6 @@ export default function (state = [], action) {
   switch (action.type) {
     case actions.BUILD_NEW_TASK_LIST:
       return state.concat([{ id: action.id, editing: true }])
-    case actions.CHOOSE_TASK_LIST:
-      return state.map(list => {
-        let data = list
-
-        if (list.active) {
-          data = { ...data, active: false }
-        }
-
-        if (list.id === action.id) {
-          data = { ...data, active: true }
-        }
-
-        return data
-      })
     case actions.UPDATE_TASK_LIST:
       return state.map(list => {
         return (list.id === action.id) ? { ...list, ...action.data } : list

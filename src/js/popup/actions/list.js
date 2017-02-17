@@ -91,12 +91,6 @@ export function choose (id) {
   let tasks = tasksRepository.getTasks(id)
 
   return function (dispatch, getStore) {
-    let previousActiveList = getStore().lists.find(list => list.active)
-
-    if (previousActiveList) {
-      listsRepository.persistList({ id: previousActiveList.id, active: false })
-    }
-
     dispatch({
       type: actions.CHOOSE_TASK_LIST,
       id
@@ -104,6 +98,6 @@ export function choose (id) {
 
     dispatch(loadedTasks(tasks))
 
-    listsRepository.persistList({ id, active: true })
+    listsRepository.persistCurrentListID(id)
   }
 }

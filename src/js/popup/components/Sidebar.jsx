@@ -35,6 +35,7 @@ export default class Sidebar extends Component {
       return (
         <TaskListLink
           data={list}
+          active={this.props.currentListID === list.id}
           actions={this.props.actions}
           key={`task-list-${list.id}`} />
       )

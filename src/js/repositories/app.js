@@ -4,12 +4,12 @@ import * as runningItemTask from './runningItem'
 
 export function getState () {
   let lists = listsRepository.getLists()
-  let activeList = lists.find(list => list.active) || {}
+  let currentListID = listsRepository.getCurrentListID()
 
   return {
-    currentListID: activeList.id,
+    currentListID,
     lists: lists,
     runningItem: runningItemTask.get(),
-    tasks: tasksRepository.getTasks(activeList.id)
+    tasks: tasksRepository.getTasks(currentListID)
   }
 }

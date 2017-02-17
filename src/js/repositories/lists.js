@@ -18,6 +18,14 @@ export function deleteList (listID) {
   window.localStorage.removeItem(`task-list-${listID}`)
 }
 
+export function persistCurrentListID (listID) {
+  window.localStorage.setItem('current-list-id', listID)
+}
+
+export function getCurrentListID () {
+  return window.localStorage.getItem('current-list-id')
+}
+
 export function persistList (listData) {
   let lists = getLists()
   let updated
