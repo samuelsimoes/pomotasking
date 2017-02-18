@@ -4,6 +4,8 @@
 
 A Chrome extension pomodoro timer integrated with ToDo list.
 
+**[Install through the Chrome Web Store](https://chrome.google.com/webstore/detail/pomotasking/diofopnenjmjcpcimiimefbcmjahgldg)**
+
 <p align="center">
   <img alt="Pomotasking Screenshot" src="misc/screenshot.png" >
 </p>
