@@ -6,6 +6,9 @@ import * as runtimeEventsTypes from './constants/runtimeEventsTypes'
 import * as runningItemRepository from './repositories/runningItem'
 import runningItemInfos from './utils/runningItemInfos'
 import { presentMinutesDuration } from './utils/presentDuration'
+import migrator from './utils/migrator'
+
+migrator()
 
 function renderMinutesBadge (leftTimeInSeconds, late) {
   let color = late ? '#ED3E3E' : '#0044A9'
