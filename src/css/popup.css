@@ -3,6 +3,10 @@
   src: url('../fonts/lato.ttf')  format('truetype');
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 body, input {
   font-family: Helvetica, "sans-serif";
 }
