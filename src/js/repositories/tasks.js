@@ -19,7 +19,7 @@ export function getDayPomodoros (date = new Date()) {
       .reduce((previous, [listName, list]) => {
         list.forEach(task =>
           task.pomodoros.forEach(pomodoro => {
-            if (!pomodoro.running && !areSameDate(pomodoro.finishedAt, date)) { return }
+            if (pomodoro.running || !areSameDate(pomodoro.finishedAt, date)) { return }
             previous.push({
               taskDescription: task.description,
               taskID: task.id,
