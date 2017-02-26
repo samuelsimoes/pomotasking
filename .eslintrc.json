@@ -1,4 +1,9 @@
 {
+  "env": {
+    "browser": true,
+    "node": true,
+    "jest": true
+  },
   "extends": ["standard", "standard-jsx"],
   "parser": "babel-eslint",
   "rules": {
