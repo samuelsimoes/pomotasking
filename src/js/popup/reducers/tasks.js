@@ -45,14 +45,8 @@ function finishPomodoro (task, now) {
 }
 
 function listWithNewTask (state, currentListID, data) {
-  let finishedTasks =
-      state.filter(task => task.status === taskStatuses.FINISHED)
-
-  let notFinishedTasks =
-    state.filter(task => task.status !== taskStatuses.FINISHED)
-
   return (
-    finishedTasks
+    state
       .concat([{
         id: data.id,
         description: data.description,
@@ -61,7 +55,6 @@ function listWithNewTask (state, currentListID, data) {
         listID: currentListID,
         pomodoros: []
       }])
-      .concat(notFinishedTasks)
   )
 }
 
@@ -76,16 +69,11 @@ function toggleFinishTask (task, now) {
 function listWithToggleTask (tasks, now, toggleTaskID) {
   let task = tasks.find(task => task.id === toggleTaskID)
 
-  let finishedTasks =
-    tasks.filter(task => task.status === taskStatuses.FINISHED && task.id !== toggleTaskID)
-
-  let notFinishedTasks =
-    tasks.filter(task => task.status !== taskStatuses.FINISHED && task.id !== toggleTaskID)
+  let otherTasks =
+    tasks.filter(task => task.id !== toggleTaskID)
 
   return (
-    finishedTasks
-      .concat([toggleFinishTask(task, now)])
-      .concat(notFinishedTasks)
+    otherTasks.concat([toggleFinishTask(task, now)])
   )
 }
 
