@@ -230,8 +230,8 @@ input:focus, button:focus, a:focus {
 
 .new-task-form input[type=text] {
   border: none;
-  font-size: 15px;
-  padding: 10px;
+  font-size: 13px;
+  padding: 8px;
   background: #F7F7F7;
   border-top: 1px solid #E9E9E9;
   box-sizing: border-box;
@@ -242,7 +242,7 @@ input:focus, button:focus, a:focus {
   width: 100%;
   overflow: scroll;
   position: absolute;
-  top: 191px;
+  top: 185px;
   bottom: 0;
 }
 
