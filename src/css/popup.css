@@ -242,7 +242,7 @@ input:focus, button:focus, a:focus {
   width: 100%;
   overflow: scroll;
   position: absolute;
-  top: 211px;
+  top: 191px;
   bottom: 0;
 }
 
@@ -411,7 +411,7 @@ input:focus, button:focus, a:focus {
 .counter {
   position: relative;
   background: #4985c9;
-  height: 100px;
+  height: 80px;
 }
 
 .counter-timeout {
@@ -420,21 +420,21 @@ input:focus, button:focus, a:focus {
 
 .counter-time {
   position: absolute;
-  font-size: 50px;
+  font-size: 42px;
   display: inline-block;
   color: #fff;
   text-align: center;
   margin: 0;
-  top: 20px;
-  left: 30px;
+  top: 12px;
+  left: 23px;
   font-weight: 900;
   font-family: Lato;
 }
 
 .counter-action-buttons {
   position: absolute;
-  left: 185px;
-  top: 35px;
+  left: 155px;
+  top: 23px;
 }
 
 .counter-action-button {
