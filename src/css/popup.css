@@ -277,6 +277,7 @@ input:focus, button:focus, a:focus {
   border: none;
   background: transparent;
   padding: 0 10px;
+  padding-left: 30px;
   line-height: 42px;
   width: 100%;
   text-shadow: 0px 1px 0px #fff;
