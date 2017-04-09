@@ -31,6 +31,7 @@
     "react-dom": "^15.3.2",
     "react-redux": "^5.0.1",
     "react-sortable-hoc": "^0.4.12",
+    "react-textarea-autosize": "^4.0.5",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
     "style-loader": "^0.13.0",

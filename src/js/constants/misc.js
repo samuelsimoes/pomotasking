@@ -1,2 +1,1 @@
-export const TASK_MAX_LENGTH = 85
 export const TODAYS_POMODORO_LIST = 'TODAYS_POMODORO_LIST'

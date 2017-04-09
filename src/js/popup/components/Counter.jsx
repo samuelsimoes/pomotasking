@@ -3,6 +3,7 @@ import * as runnableTypes from '../../constants/runnableTypes'
 import runningItemInfos from '../../utils/runningItemInfos'
 import { presentFullDuration } from '../../utils/presentDuration'
 import * as configsRepository from '../../repositories/configs'
+import taskTile from '../../utils/taskTitle'
 
 export default class Counter extends Component {
   constructor () {
@@ -47,7 +48,7 @@ export default class Counter extends Component {
     return (
       <div className='main-counter'>
         <div className='counter-current-running-item'>
-          {this.props.runningItem ? this.props.runningItem.description : ''}
+          {this.props.runningItem ? taskTile(this.props.runningItem.description) : ''}
         </div>
 
         <div className={className}>

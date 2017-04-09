@@ -3,10 +3,12 @@ import '../img/pomotodo-128.png'
 import '../img/browser-action-icon.png'
 import '../img/pomotodo-notification.png'
 import * as runtimeEventsTypes from './constants/runtimeEventsTypes'
+import * as runnableTypes from './constants/runnableTypes'
 import * as runningItemRepository from './repositories/runningItem'
 import runningItemInfos from './utils/runningItemInfos'
 import { presentMinutesDuration } from './utils/presentDuration'
 import migrator from './utils/migrator'
+import taskTile from './utils/taskTitle'
 
 migrator()
 
@@ -22,11 +24,13 @@ function renderMinutesBadge (leftTimeInSeconds, late) {
   })
 }
 
-function notifyFinish (name) {
+function notifyFinish (item) {
+  let isPomodoro = (item.type === runnableTypes.POMODORO)
+
   window.chrome.notifications.create(null, {
     type: 'basic',
-    title: 'Pomotasking',
-    message: `"${name}" finished.`,
+    title: `Pomotasking - Finished ${isPomodoro ? 'Pomodoro' : 'Pause'}`,
+    message: `"${taskTile(item.description)}" finished.`,
     iconUrl: 'pomotodo-notification.png'
   })
 
@@ -47,7 +51,7 @@ function checkRunningItem (notify) {
   let infos = runningItemInfos(item.startedAt, item.type)
 
   if (infos.late && lastNotifiedItem !== item.id) {
-    notifyFinish(item.description)
+    notifyFinish(item)
     lastNotifiedItem = item.id
   }
 

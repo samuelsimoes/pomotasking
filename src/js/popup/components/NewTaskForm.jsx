@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { TASK_MAX_LENGTH } from '../../constants/misc'
+import Textarea from 'react-textarea-autosize'
+
+let ENTER_KEY_CODE = 13
 
 export default class NewTaskForm extends Component {
   constructor () {
@@ -9,6 +11,7 @@ export default class NewTaskForm extends Component {
 
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
+    this.onKeyDown = this.onKeyDown.bind(this)
   }
 
   onChange (evt) {
@@ -17,8 +20,24 @@ export default class NewTaskForm extends Component {
 
   onSubmit (evt) {
     evt.preventDefault()
+    this.submit()
+  }
+
+  submit () {
+    let description = this.state.description.trim()
+
+    if (!description.length) return
+
     this.setState({ description: '' })
+
     this.props.onSubmit(this.state.description)
+  }
+
+  onKeyDown (evt) {
+    if (evt.keyCode === ENTER_KEY_CODE && !evt.shiftKey) {
+      evt.preventDefault()
+      this.submit()
+    }
   }
 
   render () {
@@ -26,11 +45,11 @@ export default class NewTaskForm extends Component {
       <form
         onSubmit={this.onSubmit}
         className='new-task-form'>
-        <input
+        <Textarea
           required
           autoFocus
-          maxLength={TASK_MAX_LENGTH}
           type='text'
+          onKeyDown={this.onKeyDown}
           value={this.state.description}
           onChange={this.onChange}
           placeholder='New task description' />
