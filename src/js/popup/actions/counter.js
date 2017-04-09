@@ -61,6 +61,8 @@ export function finishItem () {
 
 export function cancelItem () {
   return function (dispatch, getStore) {
+    let runningItem = getStore().runningItem
+
     dispatch({
       type: actions.CANCEL_CURRENT_ITEM
     })
@@ -70,6 +72,18 @@ export function cancelItem () {
     tasksRepository.persistTasks(state.currentListID, state.tasks)
 
     runningItemRepository.persist(null)
+
+    if (runningItem &&
+        runningItem.type === runnableTypes.POMODORO &&
+        runningItem.listID !== state.currentListID) {
+      let list = tasksRepository.getTasks(runningItem.listID)
+
+      list = taskReducer(list, null, runningItem.id, {
+        type: actions.CANCEL_CURRENT_ITEM
+      })
+
+      tasksRepository.persistTasks(runningItem.listID, list)
+    }
 
     runtimeEvents.stopBadgeCounter()
   }
