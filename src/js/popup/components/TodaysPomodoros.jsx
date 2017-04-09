@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { getDayPomodoros } from '../../repositories/tasks'
+import taskTile from '../../utils/taskTitle'
 
 function presentHour (date) {
   let hour = date.getHours()
@@ -51,7 +52,7 @@ export default class TodaysPomodoros extends Component {
       return (
         <div key={key}>
           <p className='pomodoro-history-task'>
-            {firstPomodoro.taskDescription}
+            {taskTile(firstPomodoro.taskDescription)}
 
             <span className='list-name'>
               at {firstPomodoro.listName}
