@@ -83,6 +83,10 @@ function notifyFinish (item) {
     buttons: buttons[item.type]
   })
 
+  setTimeout(() =>
+    window.chrome.notifications.clear(currentNotificationID)
+  , 5000)
+
   let audio = new window.Audio('ring.ogg')
 
   audio.play()
