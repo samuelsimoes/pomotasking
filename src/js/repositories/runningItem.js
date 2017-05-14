@@ -1,14 +1,5 @@
 export function get () {
-  let item = JSON.parse(window.localStorage.getItem('running-item'))
-
-  if (item) {
-    item = {
-      ...item,
-      startedAt: new Date(item.startedAt)
-    }
-  }
-
-  return item
+  return JSON.parse(window.localStorage.getItem('running-item'))
 }
 
 export function persist (data) {

@@ -1,9 +1,10 @@
 import * as runtimeEventsTypes from '../constants/runtimeEventsTypes.js'
+import { sendMessage } from '../utils/radio'
 
-export function stopBadgeCounter () {
-  window.chrome.runtime.sendMessage({ type: runtimeEventsTypes.STOP_COUNTER })
+export function stopBadgeCounter (callback) {
+  sendMessage(runtimeEventsTypes.STOP_COUNTER)
 }
 
 export function startBadgeCounter () {
-  window.chrome.runtime.sendMessage({ type: runtimeEventsTypes.START_COUNTER })
+  sendMessage(runtimeEventsTypes.START_COUNTER)
 }

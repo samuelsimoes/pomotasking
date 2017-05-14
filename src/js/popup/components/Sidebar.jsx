@@ -3,6 +3,10 @@ import TaskListLink from './TaskListLink'
 import { TODAYS_POMODORO_LIST } from '../../constants/misc'
 
 export default class Sidebar extends Component {
+  buildList = () => this.props.actions.list.buildList()
+
+  todaysPomodoros = () => this.props.actions.list.choose(TODAYS_POMODORO_LIST)
+
   render () {
     return (
       <div className='sidebar'>
@@ -14,7 +18,7 @@ export default class Sidebar extends Component {
           {this.renderBody()}
 
           <button
-            onClick={this.props.actions.buildList}
+            onClick={this.buildList}
             className='new-list-btn'>
             New List
           </button>
@@ -26,13 +30,13 @@ export default class Sidebar extends Component {
   renderTodaysPomodoroLink () {
     let className = 'list-link'
 
-    if (this.props.currentListID === TODAYS_POMODORO_LIST) {
+    if (this.props.data.currentListID === TODAYS_POMODORO_LIST) {
       className += ' active'
     }
 
     return (
       <div className={className}>
-        <a onClick={() => this.props.actions.choose(TODAYS_POMODORO_LIST)}>
+        <a onClick={this.todaysPomodoros}>
           Today's Pomodoros
         </a>
       </div>
@@ -40,7 +44,7 @@ export default class Sidebar extends Component {
   }
 
   renderBody () {
-    if (this.props.lists.length) {
+    if (this.props.data.lists.length) {
       return (
         <div>
           {this.renderTodaysPomodoroLink()}
@@ -53,12 +57,12 @@ export default class Sidebar extends Component {
   }
 
   renderLists () {
-    return this.props.lists.map((list) => {
+    return this.props.data.lists.map((list) => {
       return (
         <TaskListLink
           data={list}
-          active={this.props.currentListID === list.id}
-          actions={this.props.actions}
+          active={this.props.data.currentListID === list.id}
+          actions={this.props.actions.list}
           key={`task-list-${list.id}`} />
       )
     })

@@ -3,8 +3,9 @@ import tasksReducer from './tasks'
 import runningItemReducer from './runningItem'
 import currentListIDReducer from './currentListID'
 import * as appRepository from '../../repositories/app'
+import rootSchema from '../../schemas/root'
 
-export default function (state = appRepository.getState(), action) {
+export default function (state = rootSchema(appRepository.getState()), action) {
   return {
     currentListID: currentListIDReducer(state.currentListID, action),
     lists: listReducer(state.lists, action),

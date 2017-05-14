@@ -3,15 +3,13 @@ import TaskPomodoros from './TaskPomodoros'
 import { OPEN, FINISHED } from '../../constants/taskStatuses'
 
 export default class TaskRow extends Component {
-  constructor () {
-    super(...arguments)
+  destroy = () => this.props.actions.destroy(this.props.task.id)
 
-    this.startEdit = this.startEdit.bind(this)
-    this.toggleFinish = this.props.actions.toggleFinish.bind(null, this.props.task.id)
-    this.start = this.props.actions.start.bind(null, this.props.task.id)
-    this.destroy = this.props.actions.destroy.bind(null, this.props.task.id)
-    this.update = this.props.actions.update.bind(null, this.props.task.id)
-  }
+  startEdit = () => this.props.startEdit()
+
+  toggleFinish = () => this.props.actions.toggleFinish(this.props.task.id)
+
+  start = () => this.props.actions.start(this.props.task.id)
 
   renderFinisheButton () {
     let className = this.props.task.status === FINISHED ? 'unfinish' : 'finish'
@@ -43,10 +41,6 @@ export default class TaskRow extends Component {
         {this.renderControlButtons()}
       </div>
     )
-  }
-
-  startEdit () {
-    this.props.startEdit()
   }
 
   renderControlButtons () {

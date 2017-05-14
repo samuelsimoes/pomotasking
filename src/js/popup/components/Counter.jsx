@@ -9,10 +9,16 @@ export default class Counter extends Component {
   constructor () {
     super(...arguments)
 
-    this.startShortPause = this.props.actions.startPause.bind(null, runnableTypes.SHORT_PAUSE)
-    this.startLongPause = this.props.actions.startPause.bind(null, runnableTypes.LONG_PAUSE)
     this.configs = configsRepository.get()
   }
+
+  startLongPause = () => this.props.actions.startPause(runnableTypes.LONG_PAUSE)
+
+  startShortPause = () => this.props.actions.startPause(runnableTypes.SHORT_PAUSE)
+
+  finishItem = () => this.props.actions.finishItem()
+
+  cancelItem = () => this.props.actions.cancelItem()
 
   componentDidMount () {
     if (this.props.runningItem) {
@@ -85,14 +91,14 @@ export default class Counter extends Component {
       <span>
         <button
           type='button'
-          onClick={this.props.actions.finishItem}
+          onClick={this.finishItem}
           className='counter-action-button primary'>
           Finish
         </button>
 
         <button
           type='button'
-          onClick={this.props.actions.cancelItem}
+          onClick={this.cancelItem}
           className='counter-action-button primary'>
           Cancel
         </button>

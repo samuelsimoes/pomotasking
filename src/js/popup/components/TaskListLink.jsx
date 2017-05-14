@@ -1,27 +1,24 @@
 import React, { PureComponent } from 'react'
+import TaskListForm from './TaskListForm'
 
 export default class TaskListLink extends PureComponent {
-  constructor () {
-    super(...arguments)
+  choose = () => this.props.actions.choose(this.props.data.id)
 
-    this.onSubmit = this.onSubmit.bind(this)
-    this.onBlur = this.onBlur.bind(this)
-    this.choose = this.props.actions.choose.bind(null, this.props.data.id)
-    this.startEdit = this.props.actions.startEdit.bind(null, this.props.data.id)
-    this.destroy = this.destroy.bind(this)
-  }
+  edit = () => this.props.actions.update(this.props.data.id, { editing: true })
 
-  onBlur (evt) {
+  destroy = () => this.props.actions.destroy(this.props.data.id)
+
+  onSubmit = (name) => this.props.actions.update(
+    this.props.data.id,
+    { editing: false, name }
+  )
+
+  onBlur = () => {
     if (this.props.data.name) {
-      this.props.actions.cancelEdit(this.props.data.id)
+      this.props.actions.update(this.props.data.id, { editing: false })
     } else {
-      this.props.actions.destroy(this.props.data.id)
+      this.destroy()
     }
-  }
-
-  onSubmit (evt) {
-    evt.preventDefault()
-    this.props.actions.submitEdit(this.props.data.id)
   }
 
   render () {
@@ -32,10 +29,6 @@ export default class TaskListLink extends PureComponent {
         {this.renderForm()}
       </div>
     )
-  }
-
-  destroy () {
-    this.props.actions.destroy(this.props.data.id)
   }
 
   className () {
@@ -52,22 +45,10 @@ export default class TaskListLink extends PureComponent {
     if (!this.props.data.editing) { return }
 
     return (
-      <form
+      <TaskListForm
+        data={this.props.data}
         onSubmit={this.onSubmit}
-        className='list-link-form'>
-        <input
-          type='text'
-          required
-          maxLength={25}
-          autoFocus
-          onBlur={this.onBlur}
-          value={this.props.data.intended_name || ''}
-          onChange={(evt) => this.props.actions.update(
-            this.props.data.id,
-            { intended_name: evt.target.value }
-          )}
-          placeholder="List's name" />
-      </form>
+        onCancel={this.onBlur} />
     )
   }
 
@@ -84,7 +65,7 @@ export default class TaskListLink extends PureComponent {
           <button
             className='edit'
             type='button'
-            onClick={this.startEdit}>
+            onClick={this.edit}>
             Edit
           </button>
           &nbsp;

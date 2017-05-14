@@ -9,6 +9,9 @@ import runningItemInfos from './utils/runningItemInfos'
 import { presentMinutesDuration } from './utils/presentDuration'
 import migrator from './utils/migrator'
 import taskTile from './utils/taskTitle'
+import runningItemSchema from './schemas/runningItem'
+import { listenMessage, sendMessage } from './utils/radio'
+import './main'
 
 migrator()
 
@@ -46,8 +49,8 @@ function clearBadge () {
   window.chrome.browserAction.setBadgeText({ text: '' })
 }
 
-function checkRunningItem (notify) {
-  let item = runningItemRepository.get()
+function checkRunningItem () {
+  let item = runningItemSchema(runningItemRepository.get())
   let infos = runningItemInfos(item.startedAt, item.type)
 
   if (infos.late && lastNotifiedItem !== item.id) {
@@ -81,12 +84,5 @@ if (runningItemRepository.get()) {
   startCheckRunningItem()
 }
 
-window.chrome.runtime.onMessage.addListener(request => {
-  if (request.type === runtimeEventsTypes.STOP_COUNTER) {
-    stopCheckRunningItem()
-  }
-
-  if (request.type === runtimeEventsTypes.START_COUNTER) {
-    startCheckRunningItem()
-  }
-})
+listenMessage(runtimeEventsTypes.STOP_COUNTER, stopCheckRunningItem)
+listenMessage(runtimeEventsTypes.START_COUNTER, startCheckRunningItem)

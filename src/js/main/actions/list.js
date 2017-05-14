@@ -4,13 +4,6 @@ import * as listsRepository from '../../repositories/lists'
 import { finishItem } from './counter'
 import uuid from 'uuid/v1'
 
-export function startEdit (id) {
-  return {
-    type: actions.START_EDIT_TASK_LIST,
-    id
-  }
-}
-
 export function buildList () {
   let id = uuid()
 
@@ -20,21 +13,15 @@ export function buildList () {
   }
 }
 
-export function cancelEdit (id) {
-  return {
-    type: actions.CANCEL_EDIT_TASK_LIST,
-    id
-  }
-}
-
-export function submitEdit (id) {
+export function update (id, data) {
   return function (dispatch, getStore) {
     let editedList = getStore().lists.find(list => list.id === id)
     let newItem = !editedList.name
 
     dispatch({
-      type: actions.SUBMIT_EDIT_TASK_LIST,
-      id
+      type: actions.UPDATE_TASK_LIST,
+      id,
+      data
     })
 
     editedList = getStore().lists.find(list => list.id === id)
@@ -44,14 +31,6 @@ export function submitEdit (id) {
     if (newItem) {
       dispatch(choose(id))
     }
-  }
-}
-
-export function update (id, data) {
-  return {
-    type: actions.UPDATE_TASK_LIST,
-    id,
-    data
   }
 }
 

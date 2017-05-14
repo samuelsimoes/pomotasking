@@ -1,4 +1,5 @@
 import { getLists } from './lists'
+import tasksSchema from '../schemas/tasks'
 
 function areSameDate (date1, date2) {
   return date1.getFullYear() === date2.getFullYear() &&
@@ -9,7 +10,7 @@ function areSameDate (date1, date2) {
 export function getDayPomodoros (date = new Date()) {
   let lists = getLists()
   let listsTasks = lists.reduce((previous, list) => {
-    previous[list.name] = getTasks(list.id)
+    previous[list.name] = tasksSchema(getTasks(list.id))
     return previous
   }, {})
 
@@ -38,23 +39,7 @@ export function getDayPomodoros (date = new Date()) {
 }
 
 export function getTasks (listID) {
-  let list = JSON.parse(window.localStorage.getItem(`task-list-${listID}`)) || []
-
-  return list.map(task => {
-    return {
-      ...task,
-      addedAt: task.addedAt ? (new Date(task.addedAt)) : null,
-      startedAt: task.startedAt ? (new Date(task.startedAt)) : null,
-      finishedAt: task.finishedAt ? (new Date(task.finishedAt)) : null,
-      pomodoros: task.pomodoros.map(pomodoro => {
-        return {
-          ...pomodoro,
-          startedAt: pomodoro.startedAt ? (new Date(pomodoro.startedAt)) : null,
-          finishedAt: pomodoro.finishedAt ? (new Date(pomodoro.finishedAt)) : null
-        }
-      })
-    }
-  })
+  return JSON.parse(window.localStorage.getItem(`task-list-${listID}`)) || []
 }
 
 export function persistTasks (listID, tasks) {

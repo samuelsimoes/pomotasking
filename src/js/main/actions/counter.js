@@ -27,6 +27,8 @@ export function startPause (pauseType) {
 
 export function finishItem () {
   return function (dispatch, getStore) {
+    runtimeEvents.stopBadgeCounter()
+
     let state = getStore()
     let runningItem = state.runningItem
     let now = new Date()
@@ -54,8 +56,6 @@ export function finishItem () {
     tasksRepository.persistTasks(state.currentListID, state.tasks)
 
     runningItemRepository.persist(null)
-
-    runtimeEvents.stopBadgeCounter()
   }
 }
 
