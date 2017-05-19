@@ -1,32 +1,34 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import TaskRow from './TaskRow'
 import TaskForm from './TaskForm'
 
-export default class Task extends PureComponent {
-  constructor () {
-    super(...arguments)
+export default class Task extends Component {
+  update = (data) => this.props.actions.update(this.props.task.id, data)
 
-    this.state = { editing: false }
-  }
+  startEdit = () => this.update({ editing: true })
+
+  finishEdit = () => this.update({ editing: false })
+
+  submitEdit = (description) => this.update({ editing: false, description })
 
   renderTaskName () {
-    if (this.state.editing) { return }
+    if (this.props.task.editing) { return }
 
     return (
       <TaskRow
-        startEdit={() => this.setState({ editing: true })}
+        startEdit={this.startEdit}
         actions={this.props.actions}
         task={this.props.task} />
     )
   }
 
   renderForm () {
-    if (!this.state.editing) { return }
+    if (!this.props.task.editing) { return }
 
     return (
       <TaskForm
-        finishEdit={() => this.setState({ editing: false })}
-        actions={this.props.actions}
+        finishEdit={this.finishEdit}
+        submit={this.submitEdit}
         task={this.props.task} />
     )
   }

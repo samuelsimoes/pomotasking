@@ -7,15 +7,23 @@ export default class TaskForm extends Component {
   constructor () {
     super(...arguments)
 
-    this.onBlur = this.onBlur.bind(this)
-    this.onSubmit = this.onSubmit.bind(this)
-    this.update = this.props.actions.update.bind(null, this.props.task.id)
-    this.onKeyDown = this.onKeyDown.bind(this)
-
     this.state = {
       description: this.props.task.description
     }
   }
+
+  onBlur = () => this.props.finishEdit()
+
+  onSubmit = (evt) => evt.preventDefault()
+
+  onKeyDown = (evt) => {
+    if (evt.keyCode === ENTER_KEY_CODE && !evt.shiftKey) {
+      evt.preventDefault()
+      this.submit()
+    }
+  }
+
+  onChange = (evt) => this.setState({ description: evt.target.value })
 
   render () {
     return (
@@ -28,17 +36,10 @@ export default class TaskForm extends Component {
           type='text'
           autoFocus
           required
-          onChange={(evt) => this.setState({ description: evt.target.value })}
+          onChange={this.onChange}
           value={this.state.description} />
       </form>
     )
-  }
-
-  onKeyDown (evt) {
-    if (evt.keyCode === ENTER_KEY_CODE && !evt.shiftKey) {
-      evt.preventDefault()
-      this.submit()
-    }
   }
 
   submit () {
@@ -46,16 +47,6 @@ export default class TaskForm extends Component {
 
     if (!description.length) return
 
-    this.update({ description: description })
-
-    this.props.finishEdit()
-  }
-
-  onSubmit (evt) {
-    evt.preventDefault()
-  }
-
-  onBlur () {
-    this.props.finishEdit()
+    this.props.submit(description)
   }
 }
