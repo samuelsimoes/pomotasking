@@ -17,7 +17,7 @@ var config = {
   },
   module: {
     loaders: [
-      { test: /\.(js|jsx)$/, loader: 'babel' },
+      { test: /\.(js|jsx)$/, loader: 'babel', exclude: /node_modules/ },
       { test: /\.css$/, loaders: ['style', 'css'] },
       { test: /\.(png|ttf|ogg)$/, loader: 'file-loader?name=[name].[ext]' },
       { test: /\.font\.(js|json)$/, loader: 'style!css!fontgen' }
