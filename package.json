@@ -1,6 +1,6 @@
 {
   "name": "chrome-pomotasking",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A Chrome Pomodoro timer with ToDo list",
   "scripts": {
     "build": "node utils/build.js",
